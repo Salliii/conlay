@@ -21,7 +21,11 @@ class PromptLayout(object):
     
 
     class Box(object):
-        def __init__(self, w:int, h:int, charset:object):
+        def __init__(self, w:int, h:int, charset:object, esccolor=str):
             self.w = w
             self.h = h
             self.charset = charset
+            self.esccolor = esccolor
+
+            self.posx = 0
+            self.posy = 0
