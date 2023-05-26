@@ -15,6 +15,11 @@ class PromptLayout(object):
         return 1
     
     
-    def __set_cursor_position__(self, x, y) -> int:
+    def __set_cursor_position__(self, x:int, y:int) -> int:
         print("\x1b[{y};{x}H".format(y=y+1, x=x+1), end="")
         return 1
+    
+
+    class Box(object):
+        def __init__(self, w:int, h:int, unicode:object):
+            pass
