@@ -1,3 +1,23 @@
+class Unicode(object):
+    class Border(object):
+        class Thick(object):
+            horizontal = u"\u2501"
+            vertical = u"\u2503"
+            top_left = u"\u250F"
+            top_right = u"\u2513"
+            bottom_left = u"\u2517"
+            bottom_right = u"\u251B"
+
+
+        class Thin(object):
+            horizontal = u"\u2500"
+            vertical = u"\u2502"
+            top_left = u"\u256D"
+            top_right = u"\u256E"
+            bottom_left = u"\u256F"
+            bottom_right = u"\u2570"
+
+
 
 
 class PromptLayout(object):
@@ -21,7 +41,7 @@ class PromptLayout(object):
     
 
     class Box(object):
-        def __init__(self, w:int, h:int, charset:object, esccolor=str):
+        def __init__(self, w:int, h:int, charset:object, esccolor=str) -> None:
             self.w = w
             self.h = h
             self.charset = charset
