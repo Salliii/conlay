@@ -41,7 +41,7 @@ class PromptLayout(object):
     
 
     class Box(object):
-        def __init__(self, w:int, h:int, charset:object, esccolor=str) -> None:
+        def __init__(self, w:int, h:int, charset:Unicode.Border, esccolor=str) -> None:
             self.w = w
             self.h = h
             self.charset = charset
@@ -49,3 +49,11 @@ class PromptLayout(object):
 
             self.posx = 0
             self.posy = 0
+
+
+    class ThinBox(Box):
+        def __init__(self, w:int, h:int, esccolor=str) -> None:
+            super().__init__(w, h, Unicode.Border.Thin, esccolor)
+            self.w = w
+            self.h = h
+            self.esccolor = esccolor
