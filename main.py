@@ -20,7 +20,7 @@ class Unicode(object):
 
 
 
-class PromptLayout(object):
+class Colay(object):
     def __init__(self) -> None:
         pass
 
@@ -41,7 +41,7 @@ class PromptLayout(object):
     
 
     class Box(object):
-        def __init__(self, w:int, h:int, charset:Unicode.Border, esccolor=str) -> None:
+        def __init__(self, w:int, h:int, charset:Unicode, esccolor=str) -> None:
             self.w = w
             self.h = h
             self.charset = charset
