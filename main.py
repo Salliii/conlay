@@ -1,6 +1,6 @@
 class Unicode(object):
     class Border(object):
-        class Thick(object):
+        class Bold(object):
             horizontal = u"\u2501"
             vertical = u"\u2503"
             top_left = u"\u250F"
@@ -41,19 +41,30 @@ class Colay(object):
     
 
     class Box(object):
-        def __init__(self, w:int, h:int, charset:Unicode, esccolor=str) -> None:
+        def __init__(self, x:int, y:int, w:int, h:int, charset:Unicode, esccolor=str) -> None:
+            self.x = x
+            self.y = y
             self.w = w
             self.h = h
             self.charset = charset
             self.esccolor = esccolor
 
-            self.posx = 0
-            self.posy = 0
-
 
     class ThinBox(Box):
-        def __init__(self, w:int, h:int, esccolor=str) -> None:
+        def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
             super().__init__(w, h, Unicode.Border.Thin, esccolor)
+            self.x = x
+            self.y = y
+            self.w = w
+            self.h = h
+            self.esccolor = esccolor
+    
+
+    class BoldBox(Box):
+        def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
+            super().__init__(w, h, Unicode.Border.Bold, esccolor)
+            self.x = x
+            self.y = y
             self.w = w
             self.h = h
             self.esccolor = esccolor
