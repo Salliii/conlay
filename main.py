@@ -65,6 +65,16 @@ class Cursor(object):
             print("\x1b[{sh}B".format(sh=sh), end="")
             return 1
         return 0
+    
+
+    def hide() -> int:
+        print("\x1b[?25l", end="")
+        return 1
+    
+    
+    def show() -> int:
+        print("\x1b[?25h", end="")
+        return 1
 
 
 
