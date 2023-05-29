@@ -60,6 +60,22 @@ class Colay(object):
         return 0
     
 
+
+    
+class Console(object):
+    def __init__(self) -> None:
+        pass
+
+
+
+    
+class Cursor(object):
+    def init(self) -> None:
+        pass
+    
+
+
+
 class Box(object):
     def __init__(self, x:int, y:int, w:int, h:int, charset:Unicode, esccolor=str) -> None:
         self.x = x
