@@ -42,8 +42,6 @@ class Console(object):
         return 1
 
 
-
-
 class Cursor(object):   
     def setPosition(x:int, y:int) -> int:
         print("\x1b[{y};{x}H".format(y=y+1, x=x+1), end="")
@@ -82,25 +80,46 @@ class Cursor(object):
 
 
 
-class Box(object):
-    def __init__(self, x:int, y:int, w:int, h:int, type:Type, esccolor="\x1b[0m") -> None:
+class Element(object):
+    def __init__(self) -> None:
+        self.subelements = []
+
+
+    def addElement(self, element:object):
+        self.subelements.append(element)
+        element.__set__()
+
+
+
+
+class Colay(Element):
+    def __init__(self) -> None:
+        super().__init__()
+        Console.reset()
+        Cursor.setPosition(0, 0)
+
+
+
+
+class Box(Element):
+    def __init__(self, x:int, y:int, w:int, h:int, type:Type, color="\x1b[0m") -> None:
+        super().__init__()
         self.x = x
         self.y = y
         self.w = w
         self.h = h
         self.type = type
-        self.esccolor = esccolor
+        self.color = color
 
-
+    def __set__(self) -> int:
+        pass
 
 
 class ThinBox(Box):
-    def __init__(self, x:int, y:int, w:int, h:int, esccolor="\x1b[0m") -> None:
-        super().__init__(x, y, w, h, Thin, esccolor)
-
-
+    def __init__(self, x:int, y:int, w:int, h:int, color="\x1b[0m") -> None:
+        super().__init__(x, y, w, h, Thin, color)
 
 
 class BoldBox(Box):
-    def __init__(self, x:int, y:int, w:int, h:int, esccolor="\x1b[0m") -> None:
-        super().__init__(x, y, w, h, Bold, esccolor)
+    def __init__(self, x:int, y:int, w:int, h:int, color="\x1b[0m") -> None:
+        super().__init__(x, y, w, h, Bold, color)
