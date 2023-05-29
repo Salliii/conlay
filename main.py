@@ -73,18 +73,8 @@ class Box(object):
 class ThinBox(Box):
     def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
         super().__init__(x, y, w, h, Unicode.Border.Thin, esccolor)
-        self.x = x
-        self.y = y
-        self.w = w
-        self.h = h
-        self.esccolor = esccolor
     
 
 class BoldBox(Box):
     def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
         super().__init__(x, y, w, h, Unicode.Border.Bold, esccolor)
-        self.x = x
-        self.y = y
-        self.w = w
-        self.h = h
-        self.esccolor = esccolor
