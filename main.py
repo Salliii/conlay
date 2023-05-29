@@ -42,7 +42,7 @@ class Console(object):
 
 class Cursor(object):   
     def setPosition(x:int, y:int) -> int:
-        print("\x1b[{y};{x}H".format(y=y+1, x=x+1), end="")
+        print("\x1b[{y};{x}H".format(y=y, x=x), end="")
         return 1
 
 
@@ -80,12 +80,23 @@ class Cursor(object):
 
 class Element(object):
     def __init__(self) -> None:
-        self.subelements = []
+        self.absx = 0
+        self.absy = 0
+        self.relx = 0
+        self.rely = 0
+        self.w = 0
+        self.h = 0
+
+        self.absolute = False
 
 
-    def addElement(self, element:object):
-        self.subelements.append(element)
-        element.__set__()
+    def addElement(self, main:object, child:object):
+        main.struct.append(child)
+
+        if not child.absolute:
+            child.absx = child.relx + self.absx
+            child.absy = child.rely + self.absy
+        child.__set__(main.struct)
 
 
 
@@ -96,41 +107,59 @@ class Colay(Element):
         Console.reset()
         Cursor.setPosition(0, 0)
 
+        self.struct = []
+
 
 
 
 class Box(Element):
     def __init__(self, x:int, y:int, w:int, h:int, type:Type, color="\x1b[0m") -> None:
         super().__init__()
-        self.x = x
-        self.y = y
+        self.absx = x
+        self.absy = y
+        self.relx = x
+        self.rely = y
         self.w = w
         self.h = h
         self.type = type
         self.color = color
 
 
-    def __set__(self) -> int:
+    def __set__(self, struct) -> int:
         for y in range(self.h):
-            Cursor.setPosition(self.x, self.y + y)
+            Cursor.setPosition(self.absx, self.absy + y)
 
             for x in range(self.w):
-                if x == 0 and y == 0:
-                    print(self.color + self.type.top_left, end="\x1b[0m")
-                elif x == 0 and y == self.h - 1:
-                    print(self.color + self.type.bottom_left, end="\x1b[0m")
-                elif x == self.w - 1 and y == 0:
-                    print(self.color + self.type.top_right, end="\x1b[0m")
-                elif x == self.w - 1 and y == self.h - 1:
-                    print(self.color + self.type.bottom_right, end="\x1b[0m")
 
-                elif x == 0 or x == self.w - 1:
-                    print(self.color + self.type.vertical, end="\x1b[0m")
-                elif y == 0 or y == self.h - 1:
-                    print(self.color + self.type.horizontal, end="\x1b[0m")
+                for element in struct:
+                    if element != self and (
+                        (self.absy+y == element.absy and (self.absx+x >= element.absx and self.absx+x <= element.absx+element.w)) or
+                        (self.absx+x == element.absx and (self.absy+y >= element.absy and self.absy+y <= element.absy+element.h)) or
+                        (self.absy+y == element.absy+element.h-1 and (self.absx+x >= element.absx and self.absx+x <= element.absx+element.w)) or
+                        (self.absx+x == element.absx+element.w-1 and (self.absy+y >= element.absy and self.absy+y <= element.absy+element.h))
+                    ):
+                        break
+                    elif element != self:
+                        Cursor.setPosition(self.absx + x, self.absy + y)
+                    else:
 
-                else:
-                    print(self.color + " ", end="\x1b[0m")
+                        if x == 0 and y == 0:
+                            print(self.color + self.type.top_left, end="\x1b[0m")
+                        elif x == 0 and y == self.h - 1:
+                            print(self.color + self.type.bottom_left, end="\x1b[0m")
+                        elif x == self.w - 1 and y == 0:
+                            print(self.color + self.type.top_right, end="\x1b[0m")
+                        elif x == self.w - 1 and y == self.h - 1:
+                            print(self.color + self.type.bottom_right, end="\x1b[0m")
+
+                        elif x == 0 or x == self.w - 1:
+                            print(self.color + self.type.vertical, end="\x1b[0m")
+                        elif y == 0 or y == self.h - 1:
+                            print(self.color + self.type.horizontal, end="\x1b[0m")
+
+                        else:
+                            print(self.color + " ", end="\x1b[0m")
+
         return 1
 
 
