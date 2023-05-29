@@ -42,11 +42,6 @@ class Cursor(object):
         pass
 
 
-    def setPosition(x:int, y:int) -> int:
-        print("\x1b[{y};{x}H".format(y=y+1, x=x+1), end="")
-        return 1
-
-
     def shiftHorizontal(sh: int) -> int:
         if sh < 0:
             print("\x1b[{sh}D".format(sh=sh*-1), end="")
@@ -81,16 +76,12 @@ class Cursor(object):
 
 class Box(Cursor, Console):
     def __init__(self, x:int, y:int, w:int, h:int, charset:Unicode, esccolor=str) -> None:
-        self.relx = x
-        self.rely = y
-        self.absx = x
-        self.absy = y
+        self.x = x
+        self.y = y
         self.w = w
         self.h = h
         self.charset = charset
         self.esccolor = esccolor
-
-        self.setPosition(self.x, self.y)
 
 
 
