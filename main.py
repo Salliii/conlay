@@ -60,31 +60,31 @@ class Colay(object):
         return 0
     
 
-    class Box(object):
-        def __init__(self, x:int, y:int, w:int, h:int, charset:Unicode, esccolor=str) -> None:
-            self.x = x
-            self.y = y
-            self.w = w
-            self.h = h
-            self.charset = charset
-            self.esccolor = esccolor
+class Box(object):
+    def __init__(self, x:int, y:int, w:int, h:int, charset:Unicode, esccolor=str) -> None:
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+        self.charset = charset
+        self.esccolor = esccolor
 
 
-    class ThinBox(Box):
-        def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
-            super().__init__(x, y, w, h, Unicode.Border.Thin, esccolor)
-            self.x = x
-            self.y = y
-            self.w = w
-            self.h = h
-            self.esccolor = esccolor
+class ThinBox(Box):
+    def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
+        super().__init__(x, y, w, h, Unicode.Border.Thin, esccolor)
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+        self.esccolor = esccolor
     
 
-    class BoldBox(Box):
-        def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
-            super().__init__(x, y, w, h, Unicode.Border.Bold, esccolor)
-            self.x = x
-            self.y = y
-            self.w = w
-            self.h = h
-            self.esccolor = esccolor
+class BoldBox(Box):
+    def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
+        super().__init__(x, y, w, h, Unicode.Border.Bold, esccolor)
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+        self.esccolor = esccolor
