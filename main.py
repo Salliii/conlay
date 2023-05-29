@@ -40,6 +40,26 @@ class Colay(object):
         return 1
     
 
+    def __shift_cursor_horizontal__(self, sh) -> int:
+        if sh < 0:
+            print("\x1b[{sh}D".format(sh=sh*-1), end="")
+            return 1
+        elif sh > 0:
+            print("\x1b[{sh}D".format(sh=sh), end="")
+            return 1
+        return 0
+    
+
+    def __shift_cursor_vertikal__(self, sh) -> int:
+        if sh < 0:
+            print("\x1b[{sh}A".format(sh=sh*-1), end="")
+            return 1
+        elif sh > 0:
+            print("\x1b[{sh}B".format(sh=sh), end="")
+            return 1
+        return 0
+    
+
     class Box(object):
         def __init__(self, x:int, y:int, w:int, h:int, charset:Unicode, esccolor=str) -> None:
             self.x = x
@@ -52,7 +72,7 @@ class Colay(object):
 
     class ThinBox(Box):
         def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
-            super().__init__(w, h, Unicode.Border.Thin, esccolor)
+            super().__init__(x, y, w, h, Unicode.Border.Thin, esccolor)
             self.x = x
             self.y = y
             self.w = w
@@ -62,7 +82,7 @@ class Colay(object):
 
     class BoldBox(Box):
         def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
-            super().__init__(w, h, Unicode.Border.Bold, esccolor)
+            super().__init__(x, y, w, h, Unicode.Border.Bold, esccolor)
             self.x = x
             self.y = y
             self.w = w
