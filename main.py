@@ -1,32 +1,30 @@
 class Type:
-    class Unicode:
-        class Border:
-            vertical = u""
-            horizontal = u""
-            top_left = u""
-            top_right = u""
-            bottom_left = u""
-            bottom_right = u""
+    vertical = u""
+    horizontal = u""
+    top_left = u""
+    top_right = u""
+    bottom_left = u""
+    bottom_right = u""
 
 
 class Bold(Type):
     def __init__(self):
-        self.Unicode.Border.vertical = u"\u2503"
-        self.Unicode.Border.horizontal = u"\u2501"
-        self.Unicode.Border.top_left = u"\u250F"
-        self.Unicode.Border.top_right = u"\u2513"
-        self.Unicode.Border.bottom_left = u"\u2517"
-        self.Unicode.Border.bottom_right = u"\u251B"
+        self.vertical = u"\u2503"
+        self.horizontal = u"\u2501"
+        self.top_left = u"\u250F"
+        self.top_right = u"\u2513"
+        self.bottom_left = u"\u2517"
+        self.bottom_right = u"\u251B"
 
 
 class Thin(Type):
     def __init__(self):
-        self.Unicode.Border.vertical = u"\u2502"
-        self.Unicode.Border.horizontal = u"\u2500"
-        self.Unicode.Border.top_left = u"\u250C"
-        self.Unicode.Border.top_right = u"\u2510"
-        self.Unicode.Border.bottom_left = u"\u2514"
-        self.Unicode.Border.bottom_right = u"\u2518"
+        self.vertical = u"\u2502"
+        self.horizontal = u"\u2500"
+        self.top_left = u"\u256D"
+        self.top_right = u"\u256E"
+        self.bottom_left = u"\u2570"
+        self.bottom_right = u"\u256F"
 
 
 
@@ -111,15 +109,36 @@ class Box(Element):
         self.type = type
         self.color = color
 
+
     def __set__(self) -> int:
-        pass
+        for y in range(self.h):
+            Cursor.setPosition(self.x, self.y + y)
+
+            for x in range(self.w):
+                if x == 0 and y == 0:
+                    print(self.color + self.type.top_left, end="\x1b[0m")
+                elif x == 0 and y == self.h - 1:
+                    print(self.color + self.type.bottom_left, end="\x1b[0m")
+                elif x == self.w - 1 and y == 0:
+                    print(self.color + self.type.top_right, end="\x1b[0m")
+                elif x == self.w - 1 and y == self.h - 1:
+                    print(self.color + self.type.bottom_right, end="\x1b[0m")
+
+                elif x == 0 or x == self.w - 1:
+                    print(self.color + self.type.vertical, end="\x1b[0m")
+                elif y == 0 or y == self.h - 1:
+                    print(self.color + self.type.horizontal, end="\x1b[0m")
+
+                else:
+                    print(self.color + " ", end="\x1b[0m")
+        return 1
 
 
 class ThinBox(Box):
     def __init__(self, x:int, y:int, w:int, h:int, color="\x1b[0m") -> None:
-        super().__init__(x, y, w, h, Thin, color)
+        super().__init__(x, y, w, h, Thin(), color)
 
 
 class BoldBox(Box):
     def __init__(self, x:int, y:int, w:int, h:int, color="\x1b[0m") -> None:
-        super().__init__(x, y, w, h, Bold, color)
+        super().__init__(x, y, w, h, Bold(), color)
