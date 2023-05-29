@@ -1,40 +1,37 @@
-class Unicode(object):
-    class Border(object):
-        class Bold(object):
-            horizontal = u"\u2501"
-            vertical = u"\u2503"
-            top_left = u"\u250F"
-            top_right = u"\u2513"
-            bottom_left = u"\u2517"
-            bottom_right = u"\u251B"
+class Type:
+    class Unicode:
+        class Border:
+            vertical = u""
+            horizontal = u""
+            top_left = u""
+            top_right = u""
+            bottom_left = u""
+            bottom_right = u""
 
 
-        class Thin(object):
-            horizontal = u"\u2500"
-            vertical = u"\u2502"
-            top_left = u"\u256D"
-            top_right = u"\u256E"
-            bottom_left = u"\u256F"
-            bottom_right = u"\u2570"
+class Bold(Type):
+    def __init__(self):
+        self.Unicode.Border.vertical = u"\u2503"
+        self.Unicode.Border.horizontal = u"\u2501"
+        self.Unicode.Border.top_left = u"\u250F"
+        self.Unicode.Border.top_right = u"\u2513"
+        self.Unicode.Border.bottom_left = u"\u2517"
+        self.Unicode.Border.bottom_right = u"\u251B"
 
 
-
-
-class Colay(object):
-    def __init__(self, **kwargs) -> None:
-        Cursor.savePosition()
-
-    def fullscreen() -> int:
-        Console.reset()
+class Thin(Type):
+    def __init__(self):
+        self.Unicode.Border.vertical = u"\u2502"
+        self.Unicode.Border.horizontal = u"\u2500"
+        self.Unicode.Border.top_left = u"\u250C"
+        self.Unicode.Border.top_right = u"\u2510"
+        self.Unicode.Border.bottom_left = u"\u2514"
+        self.Unicode.Border.bottom_right = u"\u2518"
 
 
 
 
 class Console(object):
-    def __init__(self) -> None:
-        pass
-
-
     def reset() -> int:
         print("\x1bc", end="")
         return 1
@@ -47,18 +44,9 @@ class Console(object):
 
 
 
-class Cursor(object):
-    def init(self) -> None:
-        pass
-
-
-    def savePosition() -> int:
-        print("\x1b7", end="")
-        return 1
-        
-
-    def loadPosition() -> int:
-        print("\x1b8", end="")
+class Cursor(object):   
+    def setPosition(x:int, y:int) -> int:
+        print("\x1b[{y};{x}H".format(y=y+1, x=x+1), end="")
         return 1
 
 
@@ -95,24 +83,24 @@ class Cursor(object):
 
 
 class Box(object):
-    def __init__(self, x:int, y:int, w:int, h:int, charset:Unicode, esccolor=str) -> None:
+    def __init__(self, x:int, y:int, w:int, h:int, type:Type, esccolor="\x1b[0m") -> None:
         self.x = x
         self.y = y
         self.w = w
         self.h = h
-        self.charset = charset
+        self.type = type
         self.esccolor = esccolor
 
 
 
 
 class ThinBox(Box):
-    def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
-        super().__init__(x, y, w, h, Unicode.Border.Thin, esccolor)
+    def __init__(self, x:int, y:int, w:int, h:int, esccolor="\x1b[0m") -> None:
+        super().__init__(x, y, w, h, Thin, esccolor)
 
 
 
 
 class BoldBox(Box):
-    def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
-        super().__init__(x, y, w, h, Unicode.Border.Bold, esccolor)
+    def __init__(self, x:int, y:int, w:int, h:int, esccolor="\x1b[0m") -> None:
+        super().__init__(x, y, w, h, Bold, esccolor)
