@@ -20,6 +20,16 @@ class Unicode(object):
 
 
 
+class Colay(object):
+    def __init__(self, **kwargs) -> None:
+        Cursor.savePosition()
+
+    def fullscreen() -> int:
+        Console.reset()
+
+
+
+
 class Console(object):
     def __init__(self) -> None:
         pass
@@ -40,6 +50,16 @@ class Console(object):
 class Cursor(object):
     def init(self) -> None:
         pass
+
+
+    def savePosition() -> int:
+        print("\x1b7", end="")
+        return 1
+        
+
+    def loadPosition() -> int:
+        print("\x1b8", end="")
+        return 1
 
 
     def shiftHorizontal(sh: int) -> int:
@@ -74,7 +94,7 @@ class Cursor(object):
 
 
 
-class Box(Cursor, Console):
+class Box(object):
     def __init__(self, x:int, y:int, w:int, h:int, charset:Unicode, esccolor=str) -> None:
         self.x = x
         self.y = y
@@ -89,7 +109,7 @@ class Box(Cursor, Console):
 class ThinBox(Box):
     def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
         super().__init__(x, y, w, h, Unicode.Border.Thin, esccolor)
- 
+
 
 
 
