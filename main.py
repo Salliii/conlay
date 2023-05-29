@@ -20,27 +20,34 @@ class Unicode(object):
 
 
 
-class Colay(object):
+class Console(object):
     def __init__(self) -> None:
         pass
 
 
-    def __reset_prompt__(self) -> int:
+    def reset() -> int:
         print("\x1bc", end="")
         return 1
-    
 
-    def __clear_prompt__(self) -> int:
+
+    def clear() -> int:
         print("\x1b[3J", end="")
         return 1
-    
-    
-    def __set_cursor_position__(self, x:int, y:int) -> int:
+
+
+
+
+class Cursor(object):
+    def init(self) -> None:
+        pass
+
+
+    def setPosition(x:int, y:int) -> int:
         print("\x1b[{y};{x}H".format(y=y+1, x=x+1), end="")
         return 1
-    
 
-    def __shift_cursor_horizontal__(self, sh) -> int:
+
+    def shiftHorizontal(sh: int) -> int:
         if sh < 0:
             print("\x1b[{sh}D".format(sh=sh*-1), end="")
             return 1
@@ -48,9 +55,9 @@ class Colay(object):
             print("\x1b[{sh}D".format(sh=sh), end="")
             return 1
         return 0
-    
 
-    def __shift_cursor_vertikal__(self, sh) -> int:
+
+    def shiftVertikal(sh:int) -> int:
         if sh < 0:
             print("\x1b[{sh}A".format(sh=sh*-1), end="")
             return 1
@@ -58,38 +65,32 @@ class Colay(object):
             print("\x1b[{sh}B".format(sh=sh), end="")
             return 1
         return 0
-    
-
-
-    
-class Console(object):
-    def __init__(self) -> None:
-        pass
 
 
 
-    
-class Cursor(object):
-    def init(self) -> None:
-        pass
-    
 
-
-
-class Box(object):
+class Box(Cursor, Console):
     def __init__(self, x:int, y:int, w:int, h:int, charset:Unicode, esccolor=str) -> None:
-        self.x = x
-        self.y = y
+        self.relx = x
+        self.rely = y
+        self.absx = x
+        self.absy = y
         self.w = w
         self.h = h
         self.charset = charset
         self.esccolor = esccolor
 
+        self.setPosition(self.x, self.y)
+
+
+
 
 class ThinBox(Box):
     def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
         super().__init__(x, y, w, h, Unicode.Border.Thin, esccolor)
-    
+ 
+
+
 
 class BoldBox(Box):
     def __init__(self, x:int, y:int, w:int, h:int, esccolor=str) -> None:
