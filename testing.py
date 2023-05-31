@@ -2,17 +2,28 @@ from main import *
 
 if __name__ == "__main__":
 
-    colay = Colay()
+    layout = Conlay()
 
-    main = BoldBox(10, 5, 40, 20, "\x1b[0m")
-    header = BoldBox(-2, -1, 20, 10)
-    header.override = False
-    footer = ThinBox(-2, 6, 10, 5)
+    testbox1 = BoldBox(2,2,50,20)
+    testbox1.zindex = 2
+    layout.add(testbox1)
 
-    colay.addElement(colay, main)
-    main.addElement(colay, header)
-    main.addElement(colay, footer)
+    testbox2 = BoldBox(-1,-1,26,8)
+    testbox1.add(testbox2)
+
+    testbox3 = ThinBox(0,6, 16, 8)
+    testbox3.zindex = 1
+    testbox3.padding_x = 2
+    testbox1.add(testbox3)
+
+    testbox4 = ThinBox(0, 0, 10, 7)
+    testbox3.add(testbox4)
 
 
-    Cursor.setPosition(0, 100)
+    layout.print()
+
+
+
+
+    Cursor.setPosition(0, 23)
     print()
