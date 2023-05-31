@@ -8,7 +8,7 @@ class Border:
 
 
 class Bold(Border):
-    def __init__(self):
+    def __init__(self) -> None:
         self.vertical = u"\u2503"
         self.horizontal = u"\u2501"
         self.top_left = u"\u250F"
@@ -18,7 +18,7 @@ class Bold(Border):
 
 
 class Thin(Border):
-    def __init__(self):
+    def __init__(self) -> None:
         self.vertical = u"\u2502"
         self.horizontal = u"\u2500"
         self.top_left = u"\u256D"
@@ -93,19 +93,31 @@ class Conlay(object):
         self.absolute_x = int()
         self.absolute_y = int()
         self.width = int()
+        self.min_width = int()
+        self.max_width = int()
         self.height = int()
+        self.min_height = int()
+        self.max_height = int()
         self.zindex = int()
         self.padding_x = int()
         self.padding_y = int()
+        self.text = str()
+        self.background = bool()
 
 
     def __sort_struct_by_x__(self, x, reverse=False) -> dict:
         return dict(sorted(self.struct.items(), key=lambda elem: elem[1][x], reverse=reverse))
 
 
-    def add(self, child:None) -> int: #LayoutElement
+    def add(self, child:None) -> int: #Element
+        child.zindex = self.zindex + 1
+        
         child.absolute_x = self.absolute_x + self.padding_x + child.relative_x
         child.absolute_y = self.absolute_y + self.padding_y + child.relative_y
+
+        if self.min_width != self.max_width and self.min_width < self.max_width and self.min_width >= 0:
+            child.width = min(max(child.min_width, child.width), child.max_width)
+            child.height = min(max(child.min_height, child.height), child.max_height)
 
         self.struct[child] = {
             "absolute_x": child.absolute_x,
@@ -115,11 +127,17 @@ class Conlay(object):
             "zindex": child.zindex,
             "parent": self
             }
+        
         return 1
     
 
     def print(self) -> int:
         for element, attr in self.__sort_struct_by_x__("zindex").items():
+
+            try:
+                element.__preprint__()
+            except AttributeError:
+                pass
 
             for y in range(element.height):
                 Cursor.setPosition(element.absolute_x, element.absolute_y + y)
@@ -140,27 +158,86 @@ class Conlay(object):
                         print(element.border.horizontal, end="")
 
                     else:
-                        Cursor.shiftHorizontal(1)
+                        if element.background:
+                            print(" ", end="")
+                        else:
+                            Cursor.shiftHorizontal(1)
+            
+            try:
+                element.__pastprint__()
+            except AttributeError:
+                pass
 
 
 
 
-class LayoutElement(Conlay):
+class Element(Conlay):
     def __init__(self, x:int, y:int, w:int, h:int, border:Border) -> None:
         super().__init__()
 
         self.relative_x = x
         self.relative_y = y
-        self.width = w
-        self.height = h
+        self.width = w + 2
+        self.height = h + 2
         self.border = border
 
 
-class ThinBox(LayoutElement):
+
+
+class Box(Element):
+    def __init__(self, x:int, y:int, w:int, h:int, border:Border) -> None:
+        super().__init__(x, y, w, h, border)
+
+    
+    def __preprint__(self) -> int:
+        return 1
+    
+
+    def __pastprint__(self) -> int:
+        return 1
+
+
+class ThinBox(Box):
     def __init__(self, x:int, y:int, w:int, h:int) -> None:
         super().__init__(x, y, w, h, Thin())
 
 
-class BoldBox(LayoutElement):
+class BoldBox(Box):
     def __init__(self, x:int, y:int, w:int, h:int) -> None:
         super().__init__(x, y, w, h, Bold())
+
+
+
+
+class Label(Element):
+    def __init__(self, x:int, y:int, text:str, border:Border) -> None:
+        w = len(max(text.split("\n"), key=len))
+        h = len(text.split("\n"))
+
+        super().__init__(x, y, w, h, border)
+
+        self.text = text
+
+
+    def __preprint__(self) -> int:
+        self.width = self.width + self.padding_x * 2
+        self.height = self.height + self.padding_y * 2
+
+        return 1
+
+
+    def __pastprint__(self) -> int:
+        Cursor.setPosition(self.absolute_x + 1 + self.padding_x, self.absolute_y + 1 + self.padding_y)
+        print(self.text, end="")
+
+        return 1
+
+
+class ThinLabel(Label):
+    def __init__(self, x:int, y:int, text:str) -> None:
+        super().__init__(x, y, text, Thin())
+
+
+class BoldLabel(Label):
+    def __init__(self, x:int, y:int, text:str) -> None:
+        super().__init__(x, y, text, Bold())
