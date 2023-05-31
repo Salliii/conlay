@@ -38,10 +38,26 @@ class Console(object):
     def clear() -> int:
         print("\x1b[3J", end="")
         return 1
+    
+
+    def eraseLineToEnd() -> int:
+        print("\x1b[0K", end="")
+        return 1
+    
+
+    def eraseLinefromStart() -> int:
+        print("\x1b[1K", end="")
+        return 1
+    
+
+    def eraseLine() -> int:
+        print("\x1b[2K", end="")
+        return 1
 
 
 
 
+# add ESC[0K ESC[1K ESC[2K
 class Cursor(object):   
     def setPosition(x:int, y:int) -> int:
         print("\x1b[{y};{x}H".format(y=y, x=x), end="")
