@@ -1,4 +1,4 @@
-class Type:
+class Border:
     vertical = u""
     horizontal = u""
     top_left = u""
@@ -7,7 +7,7 @@ class Type:
     bottom_right = u""
 
 
-class Bold(Type):
+class Bold(Border):
     def __init__(self):
         self.vertical = u"\u2503"
         self.horizontal = u"\u2501"
@@ -17,7 +17,7 @@ class Bold(Type):
         self.bottom_right = u"\u251B"
 
 
-class Thin(Type):
+class Thin(Border):
     def __init__(self):
         self.vertical = u"\u2502"
         self.horizontal = u"\u2500"
@@ -80,84 +80,89 @@ class Cursor(object):
 
 
 
-class Element(object):
+class Conlay(object):
+
+    struct = {}
+
+    Console.reset()
+    Cursor.setPosition(0, 0)
+
     def __init__(self) -> None:
-        self.absx = int()
-        self.absy = int()
-        self.relx = int()
-        self.rely = int()
-        self.w = int()
-        self.h = int()
-
-        self.absolute = False
-        self.override = False
-
-
-    def addElement(self, main:object, child:object):
-        main.struct.append(child)
-
-        if not child.absolute:
-            child.absx = child.relx + self.absx
-            child.absy = child.rely + self.absy
-        child.__set__(main.struct)
+        self.relative_x = int()
+        self.relative_y = int()
+        self.absolute_x = int()
+        self.absolute_y = int()
+        self.width = int()
+        self.height = int()
+        self.zindex = int()
+        self.padding_x = int()
+        self.padding_y = int()
 
 
+    def __new_zindex__(self):
+        if len(self.struct) != 0:
+            return int(sorted(self.struct.items(), key=lambda x: x[1]["zindex"], reverse=True)[0][1]["zindex"]) + 1
+        else:
+            return 0
 
 
-class Colay(Element):
-    def __init__(self) -> None:
+    def add(self, child:None): #LayoutElement
+        child.absolute_x = self.absolute_x + child.relative_x
+        child.absolute_y = self.absolute_y + child.relative_y
+
+        self.struct[child] = {
+            "absolute_x": child.absolute_x,
+            "absolute_y": child.absolute_y,
+            "width": child.width,
+            "height": child.height,
+            "zindex": child.zindex if child.zindex != 0 else self.__new_zindex__(),
+            "parent": self
+            }
+
+
+
+
+class LayoutElement(Conlay):
+    def __init__(self, x:int, y:int, w:int, h:int, border:Border) -> None:
         super().__init__()
-        Console.reset()
-        Cursor.setPosition(0, 0)
 
-        self.struct = []
-
-
-
-
-class Box(Element):
-    def __init__(self, x:int, y:int, w:int, h:int, type:Type, color="\x1b[0m") -> None:
-        super().__init__()
-        self.absx = x
-        self.absy = y
-        self.relx = x
-        self.rely = y
-        self.w = w
-        self.h = h
-        self.type = type
-        self.color = color
+        self.relative_x = x
+        self.relative_y = y
+        self.width = w
+        self.height = h
+        self.border = border
 
 
-    def __set__(self, struct) -> int:
-        for y in range(self.h):
-            Cursor.setPosition(self.absx, self.absy + y)
+    # def __set__(self, struct) -> int:
+    #     for y in range(self.h):
+    #         Cursor.setPosition(self.absx, self.absy + y)
 
-            for x in range(self.w):
-                if x == 0 and y == 0:
-                    print(self.color + self.type.top_left, end="\x1b[0m")
-                elif x == 0 and y == self.h - 1:
-                    print(self.color + self.type.bottom_left, end="\x1b[0m")
-                elif x == self.w - 1 and y == 0:
-                    print(self.color + self.type.top_right, end="\x1b[0m")
-                elif x == self.w - 1 and y == self.h - 1:
-                    print(self.color + self.type.bottom_right, end="\x1b[0m")
+    #         for x in range(self.w):
+    #             if x == 0 and y == 0:
+    #                 print(self.color + self.type.top_left, end="\x1b[0m")
+    #             elif x == 0 and y == self.h - 1:
+    #                 print(self.color + self.type.bottom_left, end="\x1b[0m")
+    #             elif x == self.w - 1 and y == 0:
+    #                 print(self.color + self.type.top_right, end="\x1b[0m")
+    #             elif x == self.w - 1 and y == self.h - 1:
+    #                 print(self.color + self.type.bottom_right, end="\x1b[0m")
 
-                elif x == 0 or x == self.w - 1:
-                    print(self.color + self.type.vertical, end="\x1b[0m")
-                elif y == 0 or y == self.h - 1:
-                    print(self.color + self.type.horizontal, end="\x1b[0m")
+    #             elif x == 0 or x == self.w - 1:
+    #                 print(self.color + self.type.vertical, end="\x1b[0m")
+    #             elif y == 0 or y == self.h - 1:
+    #                 print(self.color + self.type.horizontal, end="\x1b[0m")
 
-                else:
-                    print(self.color + " ", end="\x1b[0m")
+    #             else:
+    #                 print(self.color + " ", end="\x1b[0m")
 
-        return 1
+    #     return 1
 
 
-class ThinBox(Box):
+class ThinBox(LayoutElement):
     def __init__(self, x:int, y:int, w:int, h:int, color="\x1b[0m") -> None:
-        super().__init__(x, y, w, h, Thin(), color)
+        super().__init__(x, y, w, h, Thin())
 
 
-class BoldBox(Box):
+class BoldBox(LayoutElement):
     def __init__(self, x:int, y:int, w:int, h:int, color="\x1b[0m") -> None:
-        super().__init__(x, y, w, h, Bold(), color)
+        super().__init__(x, y, w, h, Bold())
