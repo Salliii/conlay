@@ -6,20 +6,6 @@ class Type:
     bottom_left = u""
     bottom_right = u""
 
-    tjoint_to_n_bold = u""
-    tjoint_to_e_bold = u""
-    tjoint_to_s_bold = u""
-    tjoint_to_w_bold = u""
-    xjoint_horizontal_bold = u""
-    xjoint_vertical_bold = u""
-
-    tjoint_to_n_thin = u""
-    tjoint_to_e_thin = u""
-    tjoint_to_s_thin = u""
-    tjoint_to_w_thin = u""
-    xjoint_horizontal_thin = u""
-    xjoint_vertical_thin = u""
-
 
 class Bold(Type):
     def __init__(self):
@@ -30,20 +16,6 @@ class Bold(Type):
         self.bottom_left = u"\u2517"
         self.bottom_right = u"\u251B"
 
-        self.tjoint_to_n_bold = u"\u253B"
-        self.tjoint_to_e_bold = u"\u2523"
-        self.tjoint_to_s_bold = u"\u2533"
-        self.tjoint_to_w_bold = u"\u252B"
-        self.xjoint_horizontal_bold = u"\u254B"
-        self.xjoint_vertical_bold = u"\u254B"
-
-        self.tjoint_to_n_thin = u"\u2537"
-        self.tjoint_to_e_thin = u"\u2520"
-        self.tjoint_to_s_thin = u"\u252F"
-        self.tjoint_to_w_thin = u"\u2528"
-        self.xjoint_horizontal_thin = u"\u2542"
-        self.xjoint_vertical_thin = u"\u253F"
-
 
 class Thin(Type):
     def __init__(self):
@@ -53,20 +25,6 @@ class Thin(Type):
         self.top_right = u"\u256E"
         self.bottom_left = u"\u2570"
         self.bottom_right = u"\u256F"
-
-        self.tjoint_to_n_bold = u"\u2538"
-        self.tjoint_to_e_bold = u"\u251D"
-        self.tjoint_to_s_bold = u"\u2530"
-        self.tjoint_to_w_bold = u"\u2525"
-        self.xjoint_horizontal_bold = u"\u253F"
-        self.xjoint_vertical_bold = u"\u2542"
-
-        self.tjoint_to_n_thin = u"\u2534"
-        self.tjoint_to_e_thin = u"\u251C"
-        self.tjoint_to_s_thin = u"\u252C"
-        self.tjoint_to_w_thin = u"\u2524"
-        self.xjoint_horizontal_thin = u"\u253C"
-        self.xjoint_vertical_thin = u"\u253C"
 
 
 
