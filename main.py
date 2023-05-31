@@ -82,6 +82,8 @@ class Console(object):
         return 1
 
 
+
+
 class Cursor(object):   
     def setPosition(x:int, y:int) -> int:
         print("\x1b[{y};{x}H".format(y=y, x=x), end="")
@@ -122,12 +124,12 @@ class Cursor(object):
 
 class Element(object):
     def __init__(self) -> None:
-        self.absx = 0
-        self.absy = 0
-        self.relx = 0
-        self.rely = 0
-        self.w = 0
-        self.h = 0
+        self.absx = int()
+        self.absy = int()
+        self.relx = int()
+        self.rely = int()
+        self.w = int()
+        self.h = int()
 
         self.absolute = False
         self.override = False
@@ -173,94 +175,22 @@ class Box(Element):
             Cursor.setPosition(self.absx, self.absy + y)
 
             for x in range(self.w):
+                if x == 0 and y == 0:
+                    print(self.color + self.type.top_left, end="\x1b[0m")
+                elif x == 0 and y == self.h - 1:
+                    print(self.color + self.type.bottom_left, end="\x1b[0m")
+                elif x == self.w - 1 and y == 0:
+                    print(self.color + self.type.top_right, end="\x1b[0m")
+                elif x == self.w - 1 and y == self.h - 1:
+                    print(self.color + self.type.bottom_right, end="\x1b[0m")
 
-                for element in struct:
-                    if element != self and (
-                        (self.absy+y == element.absy and (self.absx+x >= element.absx and self.absx+x < element.absx+element.w)) or
-                        (self.absx+x == element.absx and (self.absy+y >= element.absy and self.absy+y < element.absy+element.h)) or
-                        (self.absy+y == element.absy+element.h-1 and (self.absx+x >= element.absx and self.absx+x < element.absx+element.w)) or
-                        (self.absx+x == element.absx+element.w-1 and (self.absy+y >= element.absy and self.absy+y < element.absy+element.h))
-                    ):
-                        
-                        if self.absy+y == self.absy:
-                            Cursor.setPosition(self.absx+x, self.absy+y)
-                            if not self.override:
-                                if type(element.type) == Thin:
-                                    print(self.color + self.type.xjoint_vertical_thin, end="\x1b[0m")
-                                elif type(element.type) == Bold:
-                                    print(self.color + self.type.xjoint_vertical_bold, end="\x1b[0m")
-                            else:
-                                if type(element.type) == Thin:
-                                    print(self.color + self.type.tjoint_to_n_thin, end="\x1b[0m")
-                                elif type(element.type) == Bold:
-                                    print(self.color + self.type.tjoint_to_n_bold, end="\x1b[0m")
-                            break
+                elif x == 0 or x == self.w - 1:
+                    print(self.color + self.type.vertical, end="\x1b[0m")
+                elif y == 0 or y == self.h - 1:
+                    print(self.color + self.type.horizontal, end="\x1b[0m")
 
-                        elif self.absx+x == self.absx+self.w-1:
-                            Cursor.setPosition(self.absx+x, self.absy+y)
-                            if not self.override:
-                                if type(element.type) == Thin:
-                                    print(self.color + self.type.xjoint_horizontal_thin, end="\x1b[0m")
-                                elif type(element.type) == Bold:
-                                    print(self.color + self.type.xjoint_horizontal_bold, end="\x1b[0m")
-                            else:
-                                if type(element.type) == Thin:
-                                    print(self.color + self.type.tjoint_to_e_thin, end="\x1b[0m")
-                                elif type(element.type) == Bold:
-                                    print(self.color + self.type.tjoint_to_e_bold, end="\x1b[0m")
-                            break
-
-                        elif self.absy+y == self.absy+self.h-1:
-                            Cursor.setPosition(self.absx+x, self.absy+y)
-                            if not self.override:
-                                if type(element.type) == Thin:
-                                    print(self.color + self.type.xjoint_vertical_thin, end="\x1b[0m")
-                                elif type(element.type) == Bold:
-                                    print(self.color + self.type.xjoint_vertical_bold, end="\x1b[0m")
-                            else:
-                                if type(element.type) == Thin:
-                                    print(self.color + self.type.tjoint_to_s_thin, end="\x1b[0m")
-                                elif type(element.type) == Bold:
-                                    print(self.color + self.type.tjoint_to_s_bold, end="\x1b[0m")
-                            break
-
-                        elif self.absx+x == self.absx:
-                            Cursor.setPosition(self.absx+x, self.absy+y)
-                            if not self.override:
-                                if type(element.type) == Thin:
-                                    print(self.color + self.type.xjoint_horizontal_thin, end="\x1b[0m")
-                                elif type(element.type) == Bold:
-                                    print(self.color + self.type.xjoint_horizontal_bold, end="\x1b[0m")
-                            else:
-                                if type(element.type) == Thin:
-                                    print(self.color + self.type.tjoint_to_w_thin, end="\x1b[0m")
-                                elif type(element.type) == Bold:
-                                    print(self.color + self.type.tjoint_to_w_bold, end="\x1b[0m")
-                            break
-
-                        if not self.override:
-                            break
-
-                    elif element != self:
-                        Cursor.setPosition(self.absx + x, self.absy + y)
-                    else:
-
-                        if x == 0 and y == 0:
-                            print(self.color + self.type.top_left, end="\x1b[0m")
-                        elif x == 0 and y == self.h - 1:
-                            print(self.color + self.type.bottom_left, end="\x1b[0m")
-                        elif x == self.w - 1 and y == 0:
-                            print(self.color + self.type.top_right, end="\x1b[0m")
-                        elif x == self.w - 1 and y == self.h - 1:
-                            print(self.color + self.type.bottom_right, end="\x1b[0m")
-
-                        elif x == 0 or x == self.w - 1:
-                            print(self.color + self.type.vertical, end="\x1b[0m")
-                        elif y == 0 or y == self.h - 1:
-                            print(self.color + self.type.horizontal, end="\x1b[0m")
-
-                        else:
-                            print(self.color + " ", end="\x1b[0m")
+                else:
+                    print(self.color + " ", end="\x1b[0m")
 
         return 1
 
