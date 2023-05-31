@@ -4,20 +4,19 @@ if __name__ == "__main__":
 
     layout = Conlay()
 
-    testbox1 = BoldBox(2,2,50,20)
-    testbox1.zindex = 2
-    layout.add(testbox1)
+    main = BoldBox(10, 5, 40, 20)
+    main.padding_x = 5
+    main.padding_y = 2
+    layout.add(main)
 
-    testbox2 = BoldBox(-1,-1,26,8)
-    testbox1.add(testbox2)
+    header = ThinBox(0, 0, 30, 4)
+    main.add(header)
 
-    testbox3 = ThinBox(0,6, 16, 8)
-    testbox3.zindex = 1
-    testbox3.padding_x = 2
-    testbox1.add(testbox3)
-
-    testbox4 = ThinBox(0, 0, 10, 7)
-    testbox3.add(testbox4)
+    headline = ThinLabel(6, 2, "headline")
+    headline.padding_x = 5
+    headline.padding_y = 1
+    headline.background = True
+    header.add(headline)
 
 
     layout.print()
@@ -25,5 +24,5 @@ if __name__ == "__main__":
 
 
 
-    Cursor.setPosition(0, 23)
+    Cursor.setPosition(0, 40)
     print()
