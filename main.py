@@ -1,3 +1,5 @@
+
+
 class Border:
     vertical = u""
     horizontal = u""
@@ -161,8 +163,21 @@ class Conlay:
         self.fg_color = Color.clear
 
 
-    def __sort_childs_by_zindex__(self, reverse=False) -> dict:
+    def __sort_childs_by_zindex__(self, reverse=False) -> list:
         return list(sorted(self.childs, key=lambda child: child.zindex, reverse=reverse))
+    
+
+    def __sort_childs_by_height__(self, reverse=False) -> list:
+        return list(sorted(self.childs, key=lambda child: child.height, reverse=reverse))
+    
+
+    def __sort_childs_by_width__(self, reverse=False) -> list:
+        return list(sorted(self.childs, key=lambda child: child.width, reverse=reverse))
+
+
+    def __get_final_cursor_position__(self) -> int:
+        biggest_child = list(sorted(self.childs, key=lambda child: child.height + child.absolute_y, reverse=True))[0]
+        return int(biggest_child.height + biggest_child.absolute_y) + 1
 
 
     def add(self, element:None) -> int: #Element
@@ -181,6 +196,8 @@ class Conlay:
     
 
     def print(self) -> int:
+        Cursor.hide()
+
         for element in self.__sort_childs_by_zindex__():
 
             try:
@@ -211,11 +228,22 @@ class Conlay:
                             print(element.bg_color + element.fg_color + " ", end=Color.clear)
                         else:
                             Cursor.shiftHorizontal(1)
+
             
             try:
                 element.__pastprint__()
             except AttributeError:
                 pass
+
+        print()
+
+        try:
+            pass
+        except KeyboardInterrupt:
+            
+            Cursor.setPosition(0, self.__get_final_cursor_position__())
+            Cursor.show()
+            exit()
 
 
 
