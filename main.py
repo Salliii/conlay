@@ -29,7 +29,46 @@ class Thin(Border):
 
 
 
-class Console(object):
+class Color:
+    
+    clear = "\x1b[0m"
+
+    class Bg:
+
+        clear = "\x1b[49m"
+
+        def rgb(r:int, g:int, b:int) -> str:
+            return "\x1b[48;2;{r};{g};{b}m".format(r=r, g=g, b=b)
+        
+        black = rgb(0, 0, 0)
+        white = rgb(255, 255, 255)
+        red = rgb(205, 49, 49)
+        green = rgb(13, 188, 121)
+        blue = rgb(36, 114, 200)
+        yellow = rgb(229, 229, 16)
+        purple = rgb(188, 63, 188)
+        cyan = rgb(17, 168, 205)
+    
+    class Fg:
+
+        clear = "\x1b[49m"
+
+        def rgb(r:int, g:int, b:int) -> str:
+            return "\x1b[38;2;{r};{g};{b}m".format(r=r, g=g, b=b)
+        
+        black = rgb(0, 0, 0)
+        white = rgb(255, 255, 255)
+        red = rgb(205, 49, 49)
+        green = rgb(13, 188, 121)
+        blue = rgb(36, 114, 200)
+        yellow = rgb(229, 229, 16)
+        purple = rgb(188, 63, 188)
+        cyan = rgb(17, 168, 205)
+
+
+
+
+class Console:
     def reset() -> int:
         print("\x1bc", end="")
         return 1
@@ -57,8 +96,7 @@ class Console(object):
 
 
 
-# add ESC[0K ESC[1K ESC[2K
-class Cursor(object):   
+class Cursor:   
     def setPosition(x:int, y:int) -> int:
         print("\x1b[{y};{x}H".format(y=y, x=x), end="")
         return 1
@@ -96,7 +134,7 @@ class Cursor(object):
 
 
 
-class Conlay(object):
+class Conlay:
 
     struct = {}
 
@@ -119,6 +157,8 @@ class Conlay(object):
         self.padding_y = int()
         self.text = str()
         self.background = bool()
+        self.bg_color = Color.clear
+        self.fg_color = Color.clear
 
 
     def __sort_struct_by_x__(self, x, reverse=False) -> dict:
@@ -160,22 +200,22 @@ class Conlay(object):
 
                 for x in range(element.width):
                     if x == 0 and y == 0:
-                        print(element.border.top_left, end="")
+                        print(element.bg_color + element.fg_color + element.border.top_left, end=Color.clear)
                     elif x == 0 and y == element.height - 1:
-                        print(element.border.bottom_left, end="")
+                        print(element.bg_color + element.fg_color + element.border.bottom_left, end=Color.clear)
                     elif x == element.width - 1 and y == 0:
-                        print(element.border.top_right, end="")
+                        print(element.bg_color + element.fg_color + element.border.top_right, end=Color.clear)
                     elif x == element.width - 1 and y == element.height - 1:
-                        print(element.border.bottom_right, end="")
+                        print(element.bg_color + element.fg_color + element.border.bottom_right, end=Color.clear)
 
                     elif x == 0 or x == element.width - 1:
-                        print(element.border.vertical, end="")
+                        print(element.bg_color + element.fg_color + element.border.vertical, end=Color.clear)
                     elif y == 0 or y == element.height - 1:
-                        print(element.border.horizontal, end="")
+                        print(element.bg_color + element.fg_color + element.border.horizontal, end=Color.clear)
 
                     else:
                         if element.background:
-                            print(" ", end="")
+                            print(element.bg_color + element.fg_color + " ", end=Color.clear)
                         else:
                             Cursor.shiftHorizontal(1)
             
@@ -187,7 +227,7 @@ class Conlay(object):
 
 
 
-class Element(Conlay):
+class LayoutElement(Conlay):
     def __init__(self, x:int, y:int, w:int, h:int, border:Border) -> None:
         super().__init__()
 
@@ -200,7 +240,7 @@ class Element(Conlay):
 
 
 
-class Box(Element):
+class Box(LayoutElement):
     def __init__(self, x:int, y:int, w:int, h:int, border:Border) -> None:
         super().__init__(x, y, w, h, border)
 
@@ -225,7 +265,7 @@ class BoldBox(Box):
 
 
 
-class Label(Element):
+class Label(LayoutElement):
     def __init__(self, x:int, y:int, text:str, border:Border) -> None:
         w = len(max(text.split("\n"), key=len))
         h = len(text.split("\n"))
