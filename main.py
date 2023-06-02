@@ -136,7 +136,7 @@ class Cursor:
 
 class Conlay:
 
-    struct = {}
+    childs = []
 
     Console.reset()
     Cursor.setPosition(0, 0)
@@ -161,34 +161,27 @@ class Conlay:
         self.fg_color = Color.clear
 
 
-    def __sort_struct_by_x__(self, x, reverse=False) -> dict:
-        return dict(sorted(self.struct.items(), key=lambda elem: elem[1][x], reverse=reverse))
+    def __sort_childs_by_zindex__(self, reverse=False) -> dict:
+        return list(sorted(self.childs, key=lambda child: child.zindex, reverse=reverse))
 
 
-    def add(self, child:None) -> int: #Element
-        child.zindex = self.zindex + 1
+    def add(self, element:None) -> int: #Element
+        element.zindex = self.zindex + 1
         
-        child.absolute_x = self.absolute_x + self.padding_x + child.relative_x
-        child.absolute_y = self.absolute_y + self.padding_y + child.relative_y
+        element.absolute_x = self.absolute_x + self.padding_x + element.relative_x
+        element.absolute_y = self.absolute_y + self.padding_y + element.relative_y
 
         if self.min_width != self.max_width and self.min_width < self.max_width and self.min_width >= 0:
-            child.width = min(max(child.min_width, child.width), child.max_width)
-            child.height = min(max(child.min_height, child.height), child.max_height)
+            element.width = min(max(element.min_width, element.width), element.max_width)
+            element.height = min(max(element.min_height, element.height), element.max_height)
 
-        self.struct[child] = {
-            "absolute_x": child.absolute_x,
-            "absolute_y": child.absolute_y,
-            "width": child.width,
-            "height": child.height,
-            "zindex": child.zindex,
-            "parent": self
-            }
+        self.childs.append(element)
         
         return 1
     
 
     def print(self) -> int:
-        for element, attr in self.__sort_struct_by_x__("zindex").items():
+        for element in self.__sort_childs_by_zindex__():
 
             try:
                 element.__preprint__()
