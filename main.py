@@ -177,7 +177,7 @@ class Conlay:
 
     def __get_final_cursor_position__(self) -> int:
         biggest_child = list(sorted(self.childs, key=lambda child: child.height + child.absolute_y, reverse=True))[0]
-        return int(biggest_child.height + biggest_child.absolute_y) + 1
+        return int(biggest_child.height + biggest_child.absolute_y)
 
 
     def add(self, element:None) -> int: #Element
@@ -196,7 +196,6 @@ class Conlay:
     
 
     def print(self) -> int:
-        Cursor.hide()
 
         for element in self.__sort_childs_by_zindex__():
 
@@ -206,7 +205,7 @@ class Conlay:
                 pass
 
             for y in range(element.height):
-                Cursor.setPosition(element.absolute_x, element.absolute_y + y)
+                Cursor.setPosition(element.absolute_x, element.absolute_y + y + 1)
 
                 for x in range(element.width):
                     if x == 0 and y == 0:
@@ -235,15 +234,7 @@ class Conlay:
             except AttributeError:
                 pass
 
-        print()
-
-        try:
-            pass
-        except KeyboardInterrupt:
-            
-            Cursor.setPosition(0, self.__get_final_cursor_position__())
-            Cursor.show()
-            exit()
+        Cursor.setPosition(0, self.__get_final_cursor_position__())
 
 
 
