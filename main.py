@@ -177,7 +177,7 @@ class Conlay:
 
     def __get_final_cursor_position__(self) -> int:
         biggest_child = list(sorted(self.childs, key=lambda child: child.height + child.absolute_y, reverse=True))[0]
-        return int(biggest_child.height + biggest_child.absolute_y)
+        return int(biggest_child.height + biggest_child.absolute_y) + 1
 
 
     def add(self, element:None) -> int: #Element
