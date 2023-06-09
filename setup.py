@@ -1,7 +1,7 @@
 import setuptools
 
 
-VERSION = "1.0.3"
+VERSION = "1.0.4"
 
 with open("README.md", "r", encoding="utf-8") as readme:
     DESC_LONG = readme.read()
@@ -19,3 +19,12 @@ setuptools.setup(
     install_requires=[],
     keywords=["python", "library", "console", "layout"]
 )
+
+
+"""
+    Setup:
+    python .\setup.py sdist bdist_wheel
+
+    Upload to PyPi:
+    twine upload .\dist\*
+"""

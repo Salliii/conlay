@@ -189,7 +189,7 @@ class Conlay:
 
     # reset console and set cursor to (0, 0) after class call
     Console.reset()
-    Cursor.setPosition(0, 0)
+    Cursor.setPosition(1, 1)
 
     def __init__(self) -> None:
         # class attributes
@@ -276,7 +276,7 @@ class Conlay:
             for y in range(element.height):
 
                 # set cursors position
-                Cursor.setPosition(element.absolute_x, element.absolute_y + y + 1)
+                Cursor.setPosition(element.absolute_x, element.absolute_y + y)
 
 
                 # iterate through x axis
@@ -330,10 +330,10 @@ class LayoutElement(Conlay):
     def __init__(self, x:int, y:int, w:int, h:int, border:Border) -> None:
         super().__init__()
 
-        self.relative_x = x
-        self.relative_y = y
-        self.width = w + 2
-        self.height = h + 2
+        self.relative_x = x + 1
+        self.relative_y = y + 1
+        self.width = w
+        self.height = h
         self.border = border
 
 
@@ -375,8 +375,8 @@ class Label(LayoutElement):
 
 
     def __preprint__(self) -> int:
-        self.width = self.width + self.padding_x * 2
-        self.height = self.height + self.padding_y * 2
+        self.width = self.width + self.padding_x * 2 + 2
+        self.height = self.height + self.padding_y * 2 + 2
 
         return 1
 
