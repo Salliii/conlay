@@ -38,7 +38,9 @@ layout.print()
 ``` 
 
 
-Console output:
+<div style="background-color: rgb(60,60,60); padding: 10px; border-radius: 5px">
+    <p style="color: rgb(255,255,255);">Console output:</p>
+
 ```bash
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃╭──────────────╮            ┃
@@ -50,10 +52,15 @@ Console output:
 >
 ```
 
+</div>
+
+
+
+
 
 License
 -------
-Licensed under the <a href="https://github.com/Salliii/conlay/blob/main/LICENSE">MIT License</a>
+Licensed under the <a href="https://github.com/Salliii/conlay/blob/main/LICENSE">MIT License</a>.
 
 
 
