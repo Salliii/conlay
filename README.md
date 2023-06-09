@@ -94,45 +94,45 @@ layout.print()
 
 ## Summary
 
-- <a href="https://github.com/Salliii/conlay#Conlay()">Conlay()</a>
-  - <a href="https://github.com/Salliii/conlay#Conlay.add()">_add()_</a>
-  - <a href="https://github.com/Salliii/conlay#Conlay.print()">_print()_</a>
+- <a href="https://github.com/Salliii/conlay#conlay">Conlay()</a>
+  - <a href="https://github.com/Salliii/conlay#conlayadd">_add()_</a>
+  - <a href="https://github.com/Salliii/conlay#conlayprint">_print()_</a>
 
 ##### Elements
-- <a href="https://github.com/Salliii/conlay#LayoutElement()">LayoutElement()</a>
-- <a href="https://github.com/Salliii/conlay#Box()">Box()</a>
-- <a href="https://github.com/Salliii/conlay#ThinBox()">ThinBox()</a>
-- <a href="https://github.com/Salliii/conlay#BoldBox()">BoldBox()</a>
-- <a href="https://github.com/Salliii/conlay#Label()">Label()</a>
-- <a href="https://github.com/Salliii/conlay#ThinLabel()">ThinLabel()</a>
-- <a href="https://github.com/Salliii/conlay#BoldLabel()">BoldLabel()</a>
+- <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a>
+- <a href="https://github.com/Salliii/conlay#box">Box()</a>
+- <a href="https://github.com/Salliii/conlay#thinbox">ThinBox()</a>
+- <a href="https://github.com/Salliii/conlay#boldbox">BoldBox()</a>
+- <a href="https://github.com/Salliii/conlay#label">Label()</a>
+- <a href="https://github.com/Salliii/conlay#thinlabel">ThinLabel()</a>
+- <a href="https://github.com/Salliii/conlay#boldlabel">BoldLabel()</a>
 
 ##### Cursor & Console
-- <a href="https://github.com/Salliii/conlay#Cursor">Cursor</a>
-  - <a href="https://github.com/Salliii/conlay#Cursor.setPosition()">_setPosition()_</a>
-  - <a href="https://github.com/Salliii/conlay#Cursor.shiftHorizontal()">_shiftHorizontal()_</a>
-  - <a href="https://github.com/Salliii/conlay#Cursor.shiftVertical()">_shiftVertical()_</a>
-  - <a href="https://github.com/Salliii/conlay#Cursor.hide()">_hide()_</a>
-  - <a href="https://github.com/Salliii/conlay#Cursor.show()">_show()_</a>
+- <a href="https://github.com/Salliii/conlay#cursor">Cursor</a>
+  - <a href="https://github.com/Salliii/conlay#cursorsetposition">_setPosition()_</a>
+  - <a href="https://github.com/Salliii/conlay#cursorshifthorizontal">_shiftHorizontal()_</a>
+  - <a href="https://github.com/Salliii/conlay#cursorshiftvertical">_shiftVertical()_</a>
+  - <a href="https://github.com/Salliii/conlay#cursorhide">_hide()_</a>
+  - <a href="https://github.com/Salliii/conlay#cursorshow">_show()_</a>
 
-- <a href="https://github.com/Salliii/conlay#Console">Console</a>
-  - <a href="https://github.com/Salliii/conlay#Console.reset()">_reset()_</a>
-  - <a href="https://github.com/Salliii/conlay#Console.clear()">_clear()_</a>
-  - <a href="https://github.com/Salliii/conlay#Console.eraseLineToEnd()">_eraseLineToEnd()_</a>
-  - <a href="https://github.com/Salliii/conlay#Console.eraseLineFromStart()">_eraseLineFromStart()_</a>
-  - <a href="https://github.com/Salliii/conlay#Console.eraseLine()">_eraseLine()_</a>
+- <a href="https://github.com/Salliii/conlay#console">Console</a>
+  - <a href="https://github.com/Salliii/conlay#consolereset">_reset()_</a>
+  - <a href="https://github.com/Salliii/conlay#consoleclear">_clear()_</a>
+  - <a href="https://github.com/Salliii/conlay#consoleeraselinetoend">_eraseLineToEnd()_</a>
+  - <a href="https://github.com/Salliii/conlay#consoleeraselinefromstart">_eraseLineFromStart()_</a>
+  - <a href="https://github.com/Salliii/conlay#consoleeraseline">_eraseLine()_</a>
 
 ##### Coloring
-- <a href="https://github.com/Salliii/conlay#Color">Color</a>
-  - <a href="https://github.com/Salliii/conlay#Color.Bg">Bg</a>
-    - <a href="https://github.com/Salliii/conlay#Color.Bg.rgb()">_rgb()_</a>
-  - <a href="https://github.com/Salliii/conlay#Color.Fg">Fg</a>
-    - <a href="https://github.com/Salliii/conlay#Color.Fg.rgb()">_rgb()_</a>
+- <a href="https://github.com/Salliii/conlay#color">Color</a>
+  - <a href="https://github.com/Salliii/conlay#colorbg">Bg</a>
+    - <a href="https://github.com/Salliii/conlay#colorbgrgb">_rgb()_</a>
+  - <a href="https://github.com/Salliii/conlay#colorfg">Fg</a>
+    - <a href="https://github.com/Salliii/conlay#colorfgrgb">_rgb()_</a>
 
 ##### Border & Border Types
-- <a href="https://github.com/Salliii/conlay#Border">Border</a>
-- <a href="https://github.com/Salliii/conlay#Bold">Bold</a>
-- <a href="https://github.com/Salliii/conlay#Thin">Thin</a>
+- <a href="https://github.com/Salliii/conlay#border">Border</a>
+- <a href="https://github.com/Salliii/conlay#bold">Bold</a>
+- <a href="https://github.com/Salliii/conlay#thin">Thin</a>
 
 
 ## License
