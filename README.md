@@ -1,13 +1,9 @@
 Conlay - Console Layout
 =======================
 
-<div>
-
-    [![PyPi version][shields-pypi_version]][url-pypi_version]
-    [![Github Issues][shields-issues]][url-issues]
-    [![Github License][shields-license]][url-license]
-    
-</div>
+[![PyPi version][shields-pypi_version]][url-pypi_version]
+[![Github Issues][shields-issues]][url-issues]
+[![Github License][shields-license]][url-license]
 
 Create visually pleasing console layouts with this easy-to-use Python library. 
 
