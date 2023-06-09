@@ -53,23 +53,41 @@ Console output:
 
 Summary
 -------
-- <a href="https://github.com/Salliii/conlay#Conlay">_Conlay_</a>
-- <a href="https://github.com/Salliii/conlay#LayoutElement">_LayoutElement_</a>
-- <a href="https://github.com/Salliii/conlay#Box">_Box_</a>
-- <a href="https://github.com/Salliii/conlay#ThinBox">_ThinBox_</a>
-- <a href="https://github.com/Salliii/conlay#BoldBox">_BoldBox_</a>
-- <a href="https://github.com/Salliii/conlay#Label">_Label_</a>
-- <a href="https://github.com/Salliii/conlay#ThinLabel">_ThinLabel_</a>
-- <a href="https://github.com/Salliii/conlay#BoldLabel">_BoldLabel_</a>
+- <a href="https://github.com/Salliii/conlay#Conlay">Conlay</a>
+  - <a href="https://github.com/Salliii/conlay#Conlay.add()">_add()_</a>
+  - <a href="https://github.com/Salliii/conlay#Conlay.print()">_print()_</a>
 
-- <a href="https://github.com/Salliii/conlay#Cursor">_Cursor_</a>
-- <a href="https://github.com/Salliii/conlay#Console">_Console_</a>
+- <a href="https://github.com/Salliii/conlay#LayoutElement">LayoutElement</a>
+- <a href="https://github.com/Salliii/conlay#Box">Box</a>
+- <a href="https://github.com/Salliii/conlay#ThinBox">ThinBox</a>
+- <a href="https://github.com/Salliii/conlay#BoldBox">BoldBox</a>
+- <a href="https://github.com/Salliii/conlay#Label">Label</a>
+- <a href="https://github.com/Salliii/conlay#ThinLabel">ThinLabel</a>
+- <a href="https://github.com/Salliii/conlay#BoldLabel">BoldLabel</a>
 
-- <a href="https://github.com/Salliii/conlay#Color">_Color_</a>
+- <a href="https://github.com/Salliii/conlay#Cursor">Cursor</a>
+  - <a href="https://github.com/Salliii/conlay#Cursor.setPosition()">_setPosition()_</a>
+  - <a href="https://github.com/Salliii/conlay#Cursor.shiftHorizontal()">_shiftHorizontal()_</a>
+  - <a href="https://github.com/Salliii/conlay#Cursor.shiftVertical()">_shiftVertical()_</a>
+  - <a href="https://github.com/Salliii/conlay#Cursor.hide()">_hide()_</a>
+  - <a href="https://github.com/Salliii/conlay#Cursor.show()">_show()_</a>
 
-- <a href="https://github.com/Salliii/conlay#Border">_Border_</a>
-- <a href="https://github.com/Salliii/conlay#Bold">_Bold_</a>
-- <a href="https://github.com/Salliii/conlay#Thin">_Thin_</a>
+- <a href="https://github.com/Salliii/conlay#Console">Console</a>
+  - <a href="https://github.com/Salliii/conlay#Console.reset()">_reset()_</a>
+  - <a href="https://github.com/Salliii/conlay#Console.clear()">_clear()_</a>
+  - <a href="https://github.com/Salliii/conlay#Console.eraseLineToEnd()">_eraseLineToEnd()_</a>
+  - <a href="https://github.com/Salliii/conlay#Console.eraseLineFromStart()">_eraseLineFromStart()_</a>
+  - <a href="https://github.com/Salliii/conlay#Console.eraseLine()">_eraseLine()_</a>
+
+- <a href="https://github.com/Salliii/conlay#Color">Color</a>
+  - <a href="https://github.com/Salliii/conlay#Color.Bg">Bg</a>
+    - <a href="https://github.com/Salliii/conlay#Color.Bg.rgb()">_rgb()_</a>
+  - <a href="https://github.com/Salliii/conlay#Color.Fg">Fg</a>
+    - <a href="https://github.com/Salliii/conlay#Color.Fg.rgb()">_rgb()_</a>
+
+- <a href="https://github.com/Salliii/conlay#Border">Border</a>
+- <a href="https://github.com/Salliii/conlay#Bold">Bold</a>
+- <a href="https://github.com/Salliii/conlay#Thin">Thin</a>
 
 
 License

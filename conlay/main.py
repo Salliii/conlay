@@ -112,7 +112,7 @@ class Console:
         return 1
     
 
-    def eraseLinefromStart() -> int:
+    def eraseLineFromStart() -> int:
         """ erase line from start to cursor """
 
         print("\x1b[1K", end="")
@@ -151,7 +151,7 @@ class Cursor:
         return 0
 
 
-    def shiftVertikal(sh:int) -> int:
+    def shiftVertical(sh:int) -> int:
         """ shift cursor position on y axis
             value > 0: shift down
             value < 0: shift up """
