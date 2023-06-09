@@ -57,7 +57,7 @@ layout = Conlay()
 ```
 
 
-#### Conlay.add()
+### Conlay.add()
 You can use `add()` to assign <a href="https://github.com/Salliii/conlay#LayoutElement()">LayoutElements</a> to other <a href="https://github.com/Salliii/conlay#LayoutElement()">LayoutElements</a>.
 
 Syntax:
@@ -76,7 +76,7 @@ BoldBox(...).add(ThinLabel(...))
 ```
 
 
-#### Conlay.print()
+### Conlay.print()
 You have to call `print()` to generate and print out the layout.
 
 Syntax:
