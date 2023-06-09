@@ -39,16 +39,12 @@ layout.print()
 
 Console output:
 
-```bash
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃╭──────────────╮            ┃
-┃│this is a test│            ┃
-┃╰──────────────╯            ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-
 >
-```
+>┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+>┃╭──────────────╮            ┃
+>┃│this is a test│            ┃
+>┃╰──────────────╯            ┃
+>┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 
 Summary
@@ -66,7 +62,7 @@ Summary
 - <a href="https://github.com/Salliii/conlay#ThinLabel()">ThinLabel()</a>
 - <a href="https://github.com/Salliii/conlay#BoldLabel()">BoldLabel()</a>
 
-##### Cursor
+##### Cursor & Console
 - <a href="https://github.com/Salliii/conlay#Cursor">Cursor</a>
   - <a href="https://github.com/Salliii/conlay#Cursor.setPosition()">_setPosition()_</a>
   - <a href="https://github.com/Salliii/conlay#Cursor.shiftHorizontal()">_shiftHorizontal()_</a>
@@ -74,7 +70,6 @@ Summary
   - <a href="https://github.com/Salliii/conlay#Cursor.hide()">_hide()_</a>
   - <a href="https://github.com/Salliii/conlay#Cursor.show()">_show()_</a>
 
-##### Console
 - <a href="https://github.com/Salliii/conlay#Console">Console</a>
   - <a href="https://github.com/Salliii/conlay#Console.reset()">_reset()_</a>
   - <a href="https://github.com/Salliii/conlay#Console.clear()">_clear()_</a>
