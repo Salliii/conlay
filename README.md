@@ -7,8 +7,6 @@ Conlay - Console Layout
 
 Create visually pleasing console layouts with this easy-to-use Python library. 
 
-___________________________________________________________________________________________________
-
 
 Installing
 ----------
@@ -21,10 +19,36 @@ pip install conlay
 
 or install it from <a href="https://pypi.org/project/conlay/#files">PyPi</a>
 
-___________________________________________________________________________________________________
 
-Getting Started
----------------
+Example
+-------
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+blank_box = BoldBox(0, 0, 30, 5)
+layout.add(blank_box)
+
+label = ThinLabel(0, 0, "this is a test")
+blank_box.add(label)
+
+layout.print()
+``` 
+
+
+Console output:
+```bash
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃╭──────────────╮            ┃
+┃│this is a test│            ┃
+┃╰──────────────╯            ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+>
+```
 
 
 
