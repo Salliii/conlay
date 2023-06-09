@@ -2,7 +2,6 @@ Conlay - Console Layout
 =======================
 
 [![PyPi version][shields-pypi_version]][url-pypi_version]
-
 [![Github Issues][shields-issues]][url-issues]
 [![Github License][shields-license]][url-license]
 
