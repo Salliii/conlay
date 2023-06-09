@@ -1,5 +1,4 @@
-Conlay - Console Layout
-=======================
+# Conlay - Console Layout
 
 [![PyPi version][shields-pypi_version]][url-pypi_version]
 [![Github Issues][shields-issues]][url-issues]
@@ -8,8 +7,7 @@ Conlay - Console Layout
 Create visually pleasing console layouts with this easy-to-use Python library. 
 
 
-Installing
-----------
+## Installing
 
 Install using <a href="https://pip.pypa.io/en/stable/">pip</a>
 
@@ -20,8 +18,7 @@ pip install conlay
 or install it from <a href="https://pypi.org/project/conlay/#files">PyPi</a>
 
 
-Example
--------
+## Example
 
 ```python
 from conlay import *
@@ -51,8 +48,52 @@ Console output:
 ```
 
 
-Summary
--------
+## Conlay()
+
+`Conlay()` is the core class within the library. It generates and prints out the layout.
+
+```python
+layout = Conlay()
+```
+
+
+#### Conlay.add()
+You can use `add()` to assign <a href="https://github.com/Salliii/conlay#LayoutElement()">LayoutElements</a> to other <a href="https://github.com/Salliii/conlay#LayoutElement()">LayoutElements</a>.
+
+Syntax:
+```python
+parent.add(child)
+```
+
+Example:
+```python
+# add a LayoutElement to the main layout 
+layout = Conlay()
+layout.add(ThinBox(...))
+
+# add a LayoutElement to another LayoutElement
+BoldBox(...).add(ThinLabel(...))
+```
+
+
+#### Conlay.print()
+You have to call `print()` to generate and print out the layout.
+
+Syntax:
+```python
+layout.print()
+```
+
+Example:
+```python
+layout = Conlay()
+...
+layout.print()
+```
+
+
+## Summary
+
 - <a href="https://github.com/Salliii/conlay#Conlay()">Conlay()</a>
   - <a href="https://github.com/Salliii/conlay#Conlay.add()">_add()_</a>
   - <a href="https://github.com/Salliii/conlay#Conlay.print()">_print()_</a>
@@ -94,8 +135,8 @@ Summary
 - <a href="https://github.com/Salliii/conlay#Thin">Thin</a>
 
 
-License
--------
+## License
+
 Licensed under the <a href="https://github.com/Salliii/conlay/blob/main/LICENSE">MIT License</a>.
 
 
