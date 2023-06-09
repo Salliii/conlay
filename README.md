@@ -37,9 +37,7 @@ blank_box.add(label)
 layout.print()
 ``` 
 
-
-<div style="background-color: rgb(60,60,60); padding: 10px; border-radius: 5px">
-    <p style="color: rgb(255,255,255);">Console output:</p>
+Console output:
 
 ```bash
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -52,10 +50,26 @@ layout.print()
 >
 ```
 
-</div>
 
+Summary
+-------
+- <a href="https://github.com/Salliii/conlay#Conlay">_Conlay_</a>
+- <a href="https://github.com/Salliii/conlay#LayoutElement">_LayoutElement_</a>
+- <a href="https://github.com/Salliii/conlay#Box">_Box_</a>
+- <a href="https://github.com/Salliii/conlay#ThinBox">_ThinBox_</a>
+- <a href="https://github.com/Salliii/conlay#BoldBox">_BoldBox_</a>
+- <a href="https://github.com/Salliii/conlay#Label">_Label_</a>
+- <a href="https://github.com/Salliii/conlay#ThinLabel">_ThinLabel_</a>
+- <a href="https://github.com/Salliii/conlay#BoldLabel">_BoldLabel_</a>
 
+- <a href="https://github.com/Salliii/conlay#Cursor">_Cursor_</a>
+- <a href="https://github.com/Salliii/conlay#Console">_Console_</a>
 
+- <a href="https://github.com/Salliii/conlay#Color">_Color_</a>
+
+- <a href="https://github.com/Salliii/conlay#Border">_Border_</a>
+- <a href="https://github.com/Salliii/conlay#Bold">_Bold_</a>
+- <a href="https://github.com/Salliii/conlay#Thin">_Thin_</a>
 
 
 License
