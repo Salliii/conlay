@@ -7,6 +7,27 @@ Conlay - Console Layout
 
 Create visually pleasing console layouts with this easy-to-use Python library. 
 
+___________________________________________________________________________________________________
+
+
+Installing
+----------
+
+Install using <a href="https://pip.pypa.io/en/stable/">pip</a>
+
+```bash
+pip install conlay
+```
+
+or install it from <a href="https://pypi.org/project/conlay/#files">PyPi</a>
+
+___________________________________________________________________________________________________
+
+Getting Started
+---------------
+
+
+
 
 <!-- shields -->
 [shields-pypi_version]: https://img.shields.io/pypi/v/conlay?label=PyPi%20Version&style=for-the-badge
