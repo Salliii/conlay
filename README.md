@@ -51,6 +51,11 @@ Console output:
 ```
 
 
+License
+-------
+Licensed under the <a href="https://github.com/Salliii/conlay/blob/main/LICENSE">MIT License</a>
+
+
 
 
 <!-- shields -->
