@@ -58,7 +58,7 @@ Console output:
 layout = Conlay()
 ```
 
-There are some attributes that can be used to modify or update the positioning, scale, color and other things. Since each <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> is a subclass of this `Conlay()` class, each <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> has the same attributes.
+There are some attributes that can be used to modify or update the positioning, scale, color and other things. Because each <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> is a subclass of `Conlay()`, each <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> has the same attributes.
 
 | attribute        | description | expected type | default value |
 | :--------        | :---------- | :------------ | :------------ |
