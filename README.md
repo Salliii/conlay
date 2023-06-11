@@ -60,13 +60,17 @@ layout = Conlay()
 
 
 ### Conlay.add()
-You can use `add()` to add <a href="https://github.com/Salliii/conlay#LayoutElement()">LayoutElements</a> to other <a href="https://github.com/Salliii/conlay#LayoutElement()">LayoutElements</a>.
+You can use `add()` to add <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElements</a> to other <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElements</a>.
 
 Syntax:
 
 ```python
 parent.add(child)
 ```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `child`  | child element | <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElements()</a> or one of its subclasses such as <a href="https://github.com/Salliii/conlay#box">Box()</a>, <a href="https://github.com/Salliii/conlay#label">Label()</a>, etc. |
 
 Example:
 
@@ -95,6 +99,309 @@ Example:
 layout = Conlay()
 ...
 layout.print()
+```
+
+
+
+
+## LayoutElement()
+The `LayoutElement()` class serves as a superclass for all other layout elements such as <a href="https://github.com/Salliii/conlay#box">Box()</a>, <a href="https://github.com/Salliii/conlay#label">Label()</a>, etc.
+
+Syntax:
+
+```python
+element = LayoutElement(x, y, w, h, border)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `w`      | Elements width | `int` |
+| `h`      | Elements height | `int` |
+| `border` | Borders character set | <a href="https://github.com/Salliii/conlay#border">Border()</a> or one of its subclasses such as <a href="https://github.com/Salliii/conlay#bold">Bold()</a> or <a href="https://github.com/Salliii/conlay#thin">Thin()</a> |
+
+Example:
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+element = LayoutElement(0, 0, 30, 5, Thin())
+layout.add(element)
+
+layout.print()
+```
+
+Console output:
+
+```
+╭────────────────────────────╮
+│                            │
+│                            │
+│                            │
+╰────────────────────────────╯
+
+
+>
+```
+
+
+
+
+## Box()
+The `Box()` class is a subclass of the <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> class and is used to create a simple box.
+
+Syntax:
+
+```python
+element = Box(x, y, w, h, border)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `w`      | Elements width | `int` |
+| `h`      | Elements height | `int` |
+| `border` | Borders character set | <a href="https://github.com/Salliii/conlay#border">Border()</a> or one of its subclasses such as <a href="https://github.com/Salliii/conlay#bold">Bold()</a> or <a href="https://github.com/Salliii/conlay#thin">Thin()</a> |
+
+Example:
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+box = Box(0, 0, 30, 5, Thin())
+layout.add(box)
+
+layout.print()
+```
+
+Console output:
+
+```
+╭────────────────────────────╮
+│                            │
+│                            │
+│                            │
+╰────────────────────────────╯
+
+
+>
+```
+
+
+
+
+## ThinBox()
+The `ThinBox()` class is a subclass of the <a href="https://github.com/Salliii/conlay#box">Box()</a> class and is used to create a simple box with a <a href="https://github.com/Salliii/conlay#thin">Thin()</a> Border.
+
+Syntax:
+
+```python
+element = ThinBox(x, y, w, h)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `w`      | Elements width | `int` |
+| `h`      | Elements height | `int` |
+
+Example:
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+thinbox = ThinBox(0, 0, 30, 5)
+layout.add(thinbox)
+
+layout.print()
+```
+
+Console output:
+
+```
+╭────────────────────────────╮
+│                            │
+│                            │
+│                            │
+╰────────────────────────────╯
+
+
+>
+```
+
+
+
+
+## BoldBox()
+The `BoldBox()` class is a subclass of the <a href="https://github.com/Salliii/conlay#box">Box()</a> class and is used to create a simple box with a <a href="https://github.com/Salliii/conlay#bold">Bold()</a> Border.
+
+Syntax:
+
+```python
+element = BoldBox(x, y, w, h)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `w`      | Elements width | `int` |
+| `h`      | Elements height | `int` |
+
+Example:
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+boldbox = BoldBox(0, 0, 30, 5)
+layout.add(boldbox)
+
+layout.print()
+```
+
+Console output:
+
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                            ┃
+┃                            ┃
+┃                            ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+>
+```
+
+
+
+
+## Label()
+The `Label()` class is a subclass of the <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> class and is used to create a simple box.
+
+Syntax:
+
+```python
+element = Label(x, y, text, border)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `text`   | Text content | `str` |
+| `border` | Borders character set | <a href="https://github.com/Salliii/conlay#border">Border()</a> or one of its subclasses such as <a href="https://github.com/Salliii/conlay#bold">Bold()</a> or <a href="https://github.com/Salliii/conlay#thin">Thin()</a> |
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+label = Label(0, 0, "this is a test", Thin())
+layout.add(label)
+
+layout.print()
+```
+
+Console output:
+
+```
+╭──────────────╮
+│this is a test│
+╰──────────────╯
+
+
+>
+```
+
+
+
+
+## ThinLabel()
+The `ThinLabel()` class is a subclass of the <a href="https://github.com/Salliii/conlay#label">Label()</a> class and is used to create a simple label with a <a href="https://github.com/Salliii/conlay#thin">Thin()</a> Border.
+
+Syntax:
+
+```python
+element = ThinLabel(x, y, text)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `text`   | Text content | `str` |
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+thinlabel = ThinLabel(0, 0, "this is a test")
+layout.add(thinlabel)
+
+layout.print()
+```
+
+Console output:
+
+```
+╭──────────────╮
+│this is a test│
+╰──────────────╯
+
+
+>
+```
+
+
+
+
+## BoldLabel()
+The `BoldLabel()` class is a subclass of the <a href="https://github.com/Salliii/conlay#label">Label()</a> class and is used to create a simple label with a <a href="https://github.com/Salliii/conlay#bold">Bold()</a> Border.
+
+Syntax:
+
+```python
+element = BoldLabel(x, y, text)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `text`   | Text content | `str` |
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+boldlabel = BoldLabel(0, 0, "this is a test")
+layout.add(boldlabel)
+
+layout.print()
+```
+
+Console output:
+
+```
+┏━━━━━━━━━━━━━━┓
+┃this is a test┃
+┗━━━━━━━━━━━━━━┛
+
+
+>
 ```
 
 
@@ -304,6 +611,51 @@ Example:
 >>> Color.Fg.rgb(255, 0, 100)
 '\x1b[38;2;255;0;100m'
 ```
+
+
+
+
+## Border
+The `Border()` class and its subclasses serve as a character set and define the required Unicode characters.
+
+| class attributes | unicode characters |
+| :--------------- | :----------------- |
+| `vertical`       | n/a                |
+| `horizontal`     | n/a                |
+| `top_left`       | n/a                |
+| `top_right`      | n/a                |
+| `bottom_left`    | n/a                |
+| `bottom_right`   | n/a                |
+
+
+
+
+## Thin()
+The `Thin()` class is a subclass of <a href="https://github.com/Salliii/conlay#border">Border()</a> and serves as a character set and defines the required thin Unicode characters.
+
+| class attributes | unicode characters |
+| :--------------- | :----------------- |
+| `vertical`       | `\u2503`           |
+| `horizontal`     | `\u2501`           |
+| `top_left`       | `\u250F`           |
+| `top_right`      | `\u2513`           |
+| `bottom_left`    | `\u2517`           |
+| `bottom_right`   | `\u251B`           |
+
+
+
+
+## Bold()
+The `Bold()` class is a subclass of <a href="https://github.com/Salliii/conlay#border">Border()</a> and serves as a character set and defines the required bold Unicode characters.
+
+| class attributes | unicode characters |
+| :--------------- | :----------------- |
+| `vertical`       | `\u2502`           |
+| `horizontal`     | `\u2500`           |
+| `top_left`       | `\u256D`           |
+| `top_right`      | `\u256E`           |
+| `bottom_left`    | `\u2570`           |
+| `bottom_right`   | `\u256F`           |
 
 
 
