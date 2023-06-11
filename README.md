@@ -58,6 +58,29 @@ Console output:
 layout = Conlay()
 ```
 
+There are some attributes that can be used to modify or update the positioning, scale, color and other things. Since each <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> is a subclass of this `Conlay()` class, each <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> has the same attributes.
+
+| attribute        | description | expected type | default value |
+| :--------        | :---------- | :------------ | :------------ |
+| `relative_x`       | Relative x-position to the parent object | `int` | 0 |
+| `relative_y`       | Relative y-position to the parent object | `int` | 0 |
+| `absolute_x`       | Absolute x-position | `int` | 0 |
+| `absolute_y`       | Absolute y-position | `int` | 0 |
+| `width`            | Elements width | `int` | 0 |
+| `min_width`        | Minimal width. May limit the specified with | `int` | 0 |
+| `max_width`        | Maximal width. May limit the specified with | `int` | 0 |
+| `height`           | Elements height | `int` | 0 |
+| `min_height`       | Minimal height. May limit the specified with | `int` | 0 |
+| `max_height`       | Maximal height. May limit the specified with | `int` | 0 |
+| `zindex`           | Indicates whether an element is printed above or below other elements | `int` | 0 |
+| `padding_x`        | Specifies the padding on the x axis, which affects the absolute position of the child elements | `int` | 0 |
+| `padding_y`        | Specifies the padding on the y axis, which affects the absolute position of the child elements | `int` | 0 |
+| `text`             | Specifies the text content | `str` | n/a |
+| `background`       | Specifies whether the element should have a background or not | `bool` | False |
+| `background_color` | Specifies the background color | <a href="https://github.com/Salliii/conlay#colorbg">`Color.Bg`</a> | Color.Bg.clear |
+| `border_color`     | Specifies the border color | <a href="https://github.com/Salliii/conlay#colorfg">`Color.Fg`</a> | Color.Fg.clear |
+| `text_color`       | Specifies the text color | <a href="https://github.com/Salliii/conlay#colorfg">`Color.Fg`</a> | Color.Fg.clear |
+
 
 ### Conlay.add()
 You can use `add()` to add <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElements</a> to other <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElements</a>.
@@ -554,6 +577,7 @@ The `Color.Bg` class provides a few predefined background <a href="https://gist.
 
 | Variable Name   | rgb values    | ansi escape sequence     |
 | :------------   | :---------    | :-------------------     |
+| Color.Bg.black  |   0,   0,   0 | `\x1b[49m`               |
 | Color.Bg.black  |   0,   0,   0 | `\x1b[48;2;0;0;0m`       |
 | Color.Bg.white  | 255, 255, 255 | `\x1b[48;2;255;255;255m` |
 | Color.Bg.red    | 205,  49,  49 | `\x1b[48;2;205;49;49m`   |
@@ -586,6 +610,7 @@ The `Color.Fg` class provides a few predefined foreground <a href="https://gist.
 
 | Variable Name   | rgb values    | ansi escape sequence     |
 | :------------   | :---------    | :-------------------     |
+| Color.Bg.black  |   0,   0,   0 | `\x1b[39m`               |
 | Color.Fg.black  |   0,   0,   0 | `\x1b[38;2;0;0;0m`       |
 | Color.Fg.white  | 255, 255, 255 | `\x1b[38;2;255;255;255m` |
 | Color.Fg.red    | 205,  49,  49 | `\x1b[38;2;205;49;49m`   |
