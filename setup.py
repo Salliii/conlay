@@ -1,7 +1,7 @@
 import setuptools
 
 
-VERSION = "1.0.4"
+VERSION = "1.1.0"
 
 with open("README.md", "r", encoding="utf-8") as readme:
     DESC_LONG = readme.read()
