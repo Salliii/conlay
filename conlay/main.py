@@ -39,10 +39,8 @@ class Thin(Border):
 
 class Color:
     """ color set """
-    
-    # clear color
-    clear = "\x1b[0m"
 
+    clear = "\x1b[0m"
 
     class Bg:
         """ background color set """
@@ -54,7 +52,7 @@ class Color:
         def rgb(r:int, g:int, b:int) -> str:
             return "\x1b[48;2;{r};{g};{b}m".format(r=r, g=g, b=b)
         
-        # default color set
+        # default bg color set
         black = rgb(0, 0, 0)
         white = rgb(255, 255, 255)
         red = rgb(205, 49, 49)
@@ -75,7 +73,7 @@ class Color:
         def rgb(r:int, g:int, b:int) -> str:
             return "\x1b[38;2;{r};{g};{b}m".format(r=r, g=g, b=b)
         
-        # default color set
+        # default fg color set
         black = rgb(0, 0, 0)
         white = rgb(255, 255, 255)
         red = rgb(205, 49, 49)
@@ -187,9 +185,8 @@ class Conlay:
     # child list
     childs = []
 
-    # reset console and set cursor to (0, 0) after class call
+    # reset console
     Console.reset()
-    Cursor.setPosition(1, 1)
 
     def __init__(self) -> None:
         # class attributes
@@ -208,9 +205,9 @@ class Conlay:
         self.padding_y = int()
         self.text = str()
         self.background = bool()
-        self.background_color = Color.clear
-        self.border_color = Color.clear
-        self.text_color = Color.clear
+        self.background_color = Color.Bg.clear
+        self.border_color = Color.Fg.clear
+        self.text_color = Color.Fg.clear
 
 
     def __sort_childs_by_zindex__(self, reverse=False) -> list:
@@ -238,23 +235,28 @@ class Conlay:
         return int(biggest_child.height + biggest_child.absolute_y) + 1
 
 
-    def add(self, element:None) -> int: 
+    def add(self, child:None) -> int: 
         """ add element to layout element """
 
         # set childs zindex to self zindex + 1
-        element.zindex = self.zindex + 1
+        child.zindex = self.zindex + 1
         
         # calculate childs absolute position based on self position, padding and childs relative position
-        element.absolute_x = self.absolute_x + self.padding_x + element.relative_x
-        element.absolute_y = self.absolute_y + self.padding_y + element.relative_y
+        child.absolute_x = self.absolute_x + self.padding_x + child.relative_x
+        child.absolute_y = self.absolute_y + self.padding_y + child.relative_y
 
         # calculate childs height, width based on min- and max- width/height
         if self.min_width != self.max_width and self.min_width < self.max_width and self.min_width >= 0:
-            element.width = min(max(element.min_width, element.width), element.max_width)
-            element.height = min(max(element.min_height, element.height), element.max_height)
+            child.width = min(max(child.min_width, child.width), child.max_width)
+            child.height = min(max(child.min_height, child.height), child.max_height)
+
+        try:
+            child.__preprint__()
+        except AttributeError:
+            pass
 
         # append child to layouts child list
-        self.childs.append(element)
+        self.childs.append(child)
         
         return 1
     
@@ -262,22 +264,15 @@ class Conlay:
     def print(self) -> int:
         """ print layout """
 
+
         for element in self.__sort_childs_by_zindex__():
             # iterate through elements in child list sorted by zindex
-
-            # try elements pre-printing function
-            try:
-                element.__preprint__()
-            except AttributeError:
-                pass
-            
 
             # iterate through y axis
             for y in range(element.height):
 
                 # set cursors position
                 Cursor.setPosition(element.absolute_x, element.absolute_y + y)
-
 
                 # iterate through x axis
                 for x in range(element.width):
@@ -313,12 +308,14 @@ class Conlay:
                         else:
                             Cursor.shiftHorizontal(1)
 
-
-            # try elements past-printing function
+            # try elements specific print function
             try:
-                element.__pastprint__()
+                element.__print__()
             except AttributeError:
                 pass
+            
+            # fixes pythons print bug
+            print()
         
         # set cursor position
         Cursor.setPosition(0, self.__get_final_cursor_position__())
@@ -327,9 +324,12 @@ class Conlay:
 
 
 class LayoutElement(Conlay):
+    """ main class for each layout element """
+
     def __init__(self, x:int, y:int, w:int, h:int, border:Border) -> None:
         super().__init__()
 
+        # class attributes
         self.relative_x = x + 1
         self.relative_y = y + 1
         self.width = w
@@ -340,6 +340,8 @@ class LayoutElement(Conlay):
 
 
 class Box(LayoutElement):
+    """ layout element to create a simple box """
+
     def __init__(self, x:int, y:int, w:int, h:int, border:Border) -> None:
         super().__init__(x, y, w, h, border)
 
@@ -348,16 +350,20 @@ class Box(LayoutElement):
         return 1
     
 
-    def __pastprint__(self) -> int:
+    def __print__(self) -> int:
         return 1
 
 
 class ThinBox(Box):
+    """ layout element to create a thin box """
+
     def __init__(self, x:int, y:int, w:int, h:int) -> None:
         super().__init__(x, y, w, h, Thin())
 
 
 class BoldBox(Box):
+    """ layout element to create a bold box """
+
     def __init__(self, x:int, y:int, w:int, h:int) -> None:
         super().__init__(x, y, w, h, Bold())
 
@@ -365,34 +371,45 @@ class BoldBox(Box):
 
 
 class Label(LayoutElement):
+    """ layout element to create a simple label """
+
     def __init__(self, x:int, y:int, text:str, border:Border) -> None:
+
+        # calculates width and height depending on the text content 
         w = len(max(text.split("\n"), key=len))
         h = len(text.split("\n"))
 
         super().__init__(x, y, w, h, border)
 
+        # set text content
         self.text = text
 
 
     def __preprint__(self) -> int:
+        # calculate width and height depending on its padding
         self.width = self.width + self.padding_x * 2 + 2
         self.height = self.height + self.padding_y * 2 + 2
 
         return 1
 
 
-    def __pastprint__(self) -> int:
+    def __print__(self) -> int:
+        # print text content
         Cursor.setPosition(self.absolute_x + 1 + self.padding_x, self.absolute_y + 1 + self.padding_y)
-        print(self.text, end="")
+        print(self.text_color, self.text, end=Color.clear)
 
         return 1
 
 
 class ThinLabel(Label):
+    """ layout element to create a thin label """
+
     def __init__(self, x:int, y:int, text:str) -> None:
         super().__init__(x, y, text, Thin())
 
 
 class BoldLabel(Label):
+    """ layout element to create a bold label """
+
     def __init__(self, x:int, y:int, text:str) -> None:
         super().__init__(x, y, text, Bold())
