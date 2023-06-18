@@ -204,10 +204,13 @@ class Conlay:
         self.padding_x = int()
         self.padding_y = int()
         self.text = str()
+        self.placeholder = str()
+        self.content = str()
         self.background = bool()
         self.background_color = Color.Bg.clear
         self.border_color = Color.Fg.clear
         self.text_color = Color.Fg.clear
+        self.placeholder_color = Color.Fg.rgb(150, 150, 150)
 
 
     def __sort_childs_by_zindex__(self, reverse=False) -> list:
@@ -396,7 +399,7 @@ class Label(LayoutElement):
     def __print__(self) -> int:
         # print text content
         Cursor.setPosition(self.absolute_x + 1 + self.padding_x, self.absolute_y + 1 + self.padding_y)
-        print(self.text_color, self.text, end=Color.clear)
+        print(self.text_color + self.text, end=Color.clear)
 
         return 1
 
@@ -413,3 +416,58 @@ class BoldLabel(Label):
 
     def __init__(self, x:int, y:int, text:str) -> None:
         super().__init__(x, y, text, Bold())
+
+
+
+
+class Input(LayoutElement):
+    """ layout element to create a simple input element """
+
+    def __init__(self, x:int, y:int, text:str, length:int, border:Border) -> None:
+
+        # calculates width and height depending on the text content and the input length
+        w = len(" ".join(text.split("\n"))) + length
+        h = len(text.split("\n"))
+
+        super().__init__(x, y, w, h, border)
+
+        # set text content
+        self.text = " ".join(text.split("\n"))
+
+
+    def __preprint__(self) -> int:
+        # calculate width and height depending on its padding
+        self.width = self.width + self.padding_x * 2 + 2
+        self.height = self.height + self.padding_y * 2 + 2
+
+        return 1
+
+
+    def __print__(self) -> int:
+        # print text content
+        Cursor.setPosition(self.absolute_x + 1 + self.padding_x, self.absolute_y + 1 + self.padding_y)
+        print(self.text_color + self.text, end=Color.clear)
+
+        # print placeholder content
+        Cursor.setPosition(self.absolute_x + 1 + self.padding_x + len(self.text), self.absolute_y + 1 + self.padding_y)
+        print(self.placeholder_color + self.placeholder, end=Color.clear)
+
+        # print input
+        Cursor.setPosition(self.absolute_x + 1 + self.padding_x + len(self.text), self.absolute_y + 1 + self.padding_y)
+        self.content = input()
+
+        return 1
+
+
+class ThinInput(Input):
+    """ layout element to create a thin input """
+
+    def __init__(self, x:int, y:int, text:str, length:int) -> None:
+        super().__init__(x, y, text, length, Thin())
+
+
+class BoldInput(Input):
+    """ layout element to create a bold input """
+
+    def __init__(self, x:int, y:int, text:str, length:int) -> None:
+        super().__init__(x, y, text, length, Bold())
