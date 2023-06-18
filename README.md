@@ -6,6 +6,7 @@
 Create visually pleasing console layouts with this easy-to-use Python library. 
 
 
+<br>
 
 
 ## Installing
@@ -18,6 +19,7 @@ pip install conlay
 or install it from <a href="https://pypi.org/project/conlay/#files">PyPi</a>
 
 
+<br>
 
 
 ## Example
@@ -49,6 +51,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## Conlay()
@@ -128,6 +131,7 @@ layout.print()
 ```
 
 
+<br>
 
 
 ## LayoutElement()
@@ -174,6 +178,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## Box()
@@ -220,6 +225,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## ThinBox()
@@ -265,6 +271,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## BoldBox()
@@ -310,6 +317,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## Label()
@@ -351,6 +359,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## ThinLabel()
@@ -391,6 +400,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## BoldLabel()
@@ -431,6 +441,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## Input()
@@ -488,6 +499,7 @@ print(input_element.content)
 ```
 
 
+<br>
 
 
 ## ThinInput()
@@ -529,6 +541,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## BoldInput()
@@ -570,6 +583,7 @@ Console output:
 ```
 
 
+<br>
 
 
 ## Cursor
@@ -652,6 +666,7 @@ Cursor.show()
 ```
 
 
+<br>
 
 
 ## Console
@@ -708,6 +723,7 @@ Console.eraseLine()
 ```
 
 
+<br>
 
 
 ## Color
@@ -780,6 +796,7 @@ Example:
 ```
 
 
+<br>
 
 
 ## Border
@@ -795,6 +812,7 @@ The `Border()` class and its subclasses serve as a character set and define the 
 | `bottom_right`   | n/a                |
 
 
+<br>
 
 
 ## Thin()
@@ -810,6 +828,7 @@ The `Thin()` class is a subclass of <a href="https://github.com/Salliii/conlay#b
 | `bottom_right`   | `\u251B`           |
 
 
+<br>
 
 
 ## Bold()
@@ -825,6 +844,7 @@ The `Bold()` class is a subclass of <a href="https://github.com/Salliii/conlay#b
 | `bottom_right`   | `\u256F`           |
 
 
+<br>
 
 
 ## Summary
@@ -871,6 +891,9 @@ The `Bold()` class is a subclass of <a href="https://github.com/Salliii/conlay#b
 - <a href="https://github.com/Salliii/conlay#border">Border</a>
 - <a href="https://github.com/Salliii/conlay#bold">Bold</a>
 - <a href="https://github.com/Salliii/conlay#thin">Thin</a>
+
+
+<br>
 
 
 ## License
