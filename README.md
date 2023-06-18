@@ -60,26 +60,29 @@ layout = Conlay()
 
 There are some attributes that can be used to modify or update the positioning, scale, color and other things. Because each <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> is a subclass of `Conlay()`, each <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> has the same attributes.
 
-| attribute        | description | expected type | default value |
-| :--------        | :---------- | :------------ | :------------ |
-| `relative_x`       | Relative x-position to the parent object | `int` | 0 |
-| `relative_y`       | Relative y-position to the parent object | `int` | 0 |
-| `absolute_x`       | Absolute x-position | `int` | 0 |
-| `absolute_y`       | Absolute y-position | `int` | 0 |
-| `width`            | Elements width | `int` | 0 |
-| `min_width`        | Minimal width. May limit the specified with | `int` | 0 |
-| `max_width`        | Maximal width. May limit the specified with | `int` | 0 |
-| `height`           | Elements height | `int` | 0 |
-| `min_height`       | Minimal height. May limit the specified with | `int` | 0 |
-| `max_height`       | Maximal height. May limit the specified with | `int` | 0 |
-| `zindex`           | Indicates whether an element is printed above or below other elements | `int` | 0 |
-| `padding_x`        | Specifies the padding on the x axis, which affects the absolute position of the child elements | `int` | 0 |
-| `padding_y`        | Specifies the padding on the y axis, which affects the absolute position of the child elements | `int` | 0 |
-| `text`             | Specifies the text content | `str` | n/a |
-| `background`       | Specifies whether the element should have a background or not | `bool` | False |
-| `background_color` | Specifies the background color | <a href="https://github.com/Salliii/conlay#colorbg">`Color.Bg`</a> | Color.Bg.clear |
-| `border_color`     | Specifies the border color | <a href="https://github.com/Salliii/conlay#colorfg">`Color.Fg`</a> | Color.Fg.clear |
-| `text_color`       | Specifies the text color | <a href="https://github.com/Salliii/conlay#colorfg">`Color.Fg`</a> | Color.Fg.clear |
+| attribute           | description | expected type | default value |
+| :--------           | :---------- | :------------ | :------------ |
+| `relative_x`        | Relative x-position to the parent object | `int` | 0 |
+| `relative_y`        | Relative y-position to the parent object | `int` | 0 |
+| `absolute_x`        | Absolute x-position | `int` | 0 |
+| `absolute_y`        | Absolute y-position | `int` | 0 |
+| `width`             | Elements width | `int` | 0 |
+| `min_width`         | Minimal width. May limit the specified with | `int` | 0 |
+| `max_width`         | Maximal width. May limit the specified with | `int` | 0 |
+| `height`            | Elements height | `int` | 0 |
+| `min_height`        | Minimal height. May limit the specified with | `int` | 0 |
+| `max_height`        | Maximal height. May limit the specified with | `int` | 0 |
+| `zindex`            | Indicates whether an element is printed above or below other elements | `int` | 0 |
+| `padding_x`         | Specifies the padding on the x axis, which affects the absolute position of the child elements | `int` | 0 |
+| `padding_y`         | Specifies the padding on the y axis, which affects the absolute position of the child elements | `int` | 0 |
+| `text`              | Specifies the text content | `str` | n/a |
+| `placeholder`       | Specifies the placeholder content | `str` | n/a |
+| `content`           | Stores the text content of the input element, etc. | `str` | n/a |
+| `background`        | Specifies whether the element should have a background or not | `bool` | False |
+| `background_color`  | Specifies the background color | <a href="https://github.com/Salliii/conlay#colorbg">`Color.Bg`</a> | Color.Bg.clear |
+| `border_color`      | Specifies the border color | <a href="https://github.com/Salliii/conlay#colorfg">`Color.Fg`</a> | Color.Fg.clear |
+| `text_color`        | Specifies the text color | <a href="https://github.com/Salliii/conlay#colorfg">`Color.Fg`</a> | Color.Fg.clear |
+| `placeholder_color` | Specifies the placeholder color | <a href="https://github.com/Salliii/conlay#colorfg">`Color.Fg`</a> | Color.Fg.rgb(150, 150, 150) |
 
 
 ### Conlay.add()
@@ -430,6 +433,145 @@ Console output:
 
 
 
+## Input()
+The `Input()` class is a subclass of the <a href="https://github.com/Salliii/conlay#layoutelement">LayoutElement()</a> class and is used to create a input field.
+
+Syntax:
+
+```python
+element = Input(x, y, text, length, border)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `text`   | Text content | `str` |
+| `length` | expected input length | `int` |
+| `border` | Borders character set | <a href="https://github.com/Salliii/conlay#border">Border()</a> or one of its subclasses such as <a href="https://github.com/Salliii/conlay#bold">Bold()</a> or <a href="https://github.com/Salliii/conlay#thin">Thin()</a> |
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+input_element = Input(0, 0, "input:", 10, Thin())
+layout.add(input_element)
+
+layout.print()
+```
+
+Console output:
+
+```
+╭────────────────╮
+│input:          │
+╰────────────────╯
+
+
+>
+```
+
+after you've entered a text, you can get it with the element.content variable
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+input_element = Input(0, 0, "input:", 10, Thin())
+layout.add(input_element)
+
+layout.print()
+
+print(input_element.content)
+```
+
+
+
+
+## ThinInput()
+The `ThinInput()` class is a subclass of the <a href="https://github.com/Salliii/conlay#input">Input()</a> class and is used to create a simple input field with a <a href="https://github.com/Salliii/conlay#thin">Thin()</a> Border.
+
+Syntax:
+
+```python
+element = ThinInput(x, y, text, length)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `text`   | Text content | `str` |
+| `length` | expected input length | `int` |
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+input_element = ThinInput(0, 0, "input:", 10)
+layout.add(input_element)
+
+layout.print()
+```
+
+Console output:
+
+```
+╭────────────────╮
+│input:          │
+╰────────────────╯
+
+
+>
+```
+
+
+
+
+## BoldInput()
+The `BoldInput()` class is a subclass of the <a href="https://github.com/Salliii/conlay#input">Input()</a> class and is used to create a simple input field with a <a href="https://github.com/Salliii/conlay#bold">Bold()</a> Border.
+
+Syntax:
+
+```python
+element = BoldInput(x, y, text, length)
+```
+
+| argument | description | expected type |
+| :------- | :---------- | :------------ |
+| `x`      | Relative x-position to its parent element | `int` |
+| `y`      | Relative y-position to its parent element | `int` |
+| `text`   | Text content | `str` |
+| `length` | expected input length | `int` |
+
+```python
+from conlay import *
+
+layout = Conlay()
+
+input_element = BoldInput(0, 0, "input:", 10)
+layout.add(input_element)
+
+layout.print()
+```
+
+Console output:
+
+```
+┏━━━━━━━━━━━━━━━━┓
+┃input:          ┃
+┗━━━━━━━━━━━━━━━━┛
+
+
+>
+```
+
+
+
+
 ## Cursor
 The `Cursor` class provides a few functions for simple <a href="https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797">Ansi Escape</a> cursor actions.
 
@@ -699,6 +841,9 @@ The `Bold()` class is a subclass of <a href="https://github.com/Salliii/conlay#b
 - <a href="https://github.com/Salliii/conlay#label">Label()</a>
 - <a href="https://github.com/Salliii/conlay#thinlabel">ThinLabel()</a>
 - <a href="https://github.com/Salliii/conlay#boldlabel">BoldLabel()</a>
+- <a href="https://github.com/Salliii/conlay#input">Input()</a>
+- <a href="https://github.com/Salliii/conlay#thininput">ThinInput()</a>
+- <a href="https://github.com/Salliii/conlay#boldinput">BoldInput()</a>
 
 ##### Cursor & Console
 - <a href="https://github.com/Salliii/conlay#cursor">Cursor</a>
